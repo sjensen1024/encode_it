@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Encoded items" %>
+
+<h1>Encoded items</h1>
+
+<div id="encoded_items">
+  <% @encoded_items.each do |encoded_item| %>
+    <%= render encoded_item %>
+    <p>
+      <%= link_to "Show this encoded item", encoded_item %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New encoded item", new_encoded_item_path %>

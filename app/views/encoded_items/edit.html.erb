@@ -1,0 +1,12 @@
+<% content_for :title, "Editing encoded item" %>
+
+<h1>Editing encoded item</h1>
+
+<%= render "form", encoded_item: @encoded_item %>
+
+<br>
+
+<div>
+  <%= link_to "Show this encoded item", @encoded_item %> |
+  <%= link_to "Back to encoded items", encoded_items_path %>
+</div>
