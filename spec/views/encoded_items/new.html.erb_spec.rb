@@ -12,7 +12,6 @@ RSpec.describe "encoded_items/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", encoded_items_path, "post" do
-
       assert_select "input[name=?]", "encoded_item[descriptor]"
 
       assert_select "input[name=?]", "encoded_item[value]"
