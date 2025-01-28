@@ -16,9 +16,12 @@ RSpec.describe "/encoded_items", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # EncodedItem. As you add validations to EncodedItem, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    {
+        descriptor: 'Some descriptor',
+        value: 'Hello world!'
+    }
+  end
 
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
