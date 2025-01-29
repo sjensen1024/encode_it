@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :encoded_items
-  resources :decoded_items, only: [ :show, :index ]
+  resources :encoded_items, only: [ :index, :show, :new, :create, :destroy ]
+  resources :decoded_items, only: [ :index, :show ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -23,10 +23,6 @@ RSpec.describe "/encoded_items", type: :request do
     }
   end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
   describe "GET /index" do
     it "renders a successful response" do
       EncodedItem.create! valid_attributes
@@ -50,14 +46,6 @@ RSpec.describe "/encoded_items", type: :request do
     end
   end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
-      encoded_item = EncodedItem.create! valid_attributes
-      get edit_encoded_item_url(encoded_item)
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new EncodedItem" do
@@ -69,49 +57,6 @@ RSpec.describe "/encoded_items", type: :request do
       it "redirects to the created encoded_item" do
         post encoded_items_url, params: { encoded_item: valid_attributes }
         expect(response).to redirect_to(encoded_item_url(EncodedItem.last))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new EncodedItem" do
-        expect {
-          post encoded_items_url, params: { encoded_item: invalid_attributes }
-        }.to change(EncodedItem, :count).by(0)
-      end
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post encoded_items_url, params: { encoded_item: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested encoded_item" do
-        encoded_item = EncodedItem.create! valid_attributes
-        patch encoded_item_url(encoded_item), params: { encoded_item: new_attributes }
-        encoded_item.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the encoded_item" do
-        encoded_item = EncodedItem.create! valid_attributes
-        patch encoded_item_url(encoded_item), params: { encoded_item: new_attributes }
-        encoded_item.reload
-        expect(response).to redirect_to(encoded_item_url(encoded_item))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        encoded_item = EncodedItem.create! valid_attributes
-        patch encoded_item_url(encoded_item), params: { encoded_item: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

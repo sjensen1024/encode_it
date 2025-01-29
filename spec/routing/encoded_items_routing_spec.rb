@@ -14,21 +14,8 @@ RSpec.describe EncodedItemsController, type: :routing do
       expect(get: "/encoded_items/1").to route_to("encoded_items#show", id: "1")
     end
 
-    it "routes to #edit" do
-      expect(get: "/encoded_items/1/edit").to route_to("encoded_items#edit", id: "1")
-    end
-
-
     it "routes to #create" do
       expect(post: "/encoded_items").to route_to("encoded_items#create")
-    end
-
-    it "routes to #update via PUT" do
-      expect(put: "/encoded_items/1").to route_to("encoded_items#update", id: "1")
-    end
-
-    it "routes to #update via PATCH" do
-      expect(patch: "/encoded_items/1").to route_to("encoded_items#update", id: "1")
     end
 
     it "routes to #destroy" do

@@ -2,9 +2,9 @@ class DecodedItemsController < ApplicationController
     def index
         encoded_items = EncodedItem.all
 
-        render json: encoded_items.map{ |item| format_item_with_decoded_value(item) }
+        render json: encoded_items.map { |item| format_item_with_decoded_value(item) }
     end
-    
+
     def show
         encoded_item = EncodedItem.find(params[:id])
         @decoded_item = encoded_item.decode_value
