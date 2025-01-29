@@ -1,5 +1,5 @@
 class EncodedItemsController < ApplicationController
-  before_action :set_encoded_item, only: %i[ show edit update destroy ]
+  before_action :set_encoded_item, only: %i[ show destroy ]
 
   # GET /encoded_items or /encoded_items.json
   def index
@@ -15,10 +15,6 @@ class EncodedItemsController < ApplicationController
     @encoded_item = EncodedItem.new
   end
 
-  # GET /encoded_items/1/edit
-  def edit
-  end
-
   # POST /encoded_items or /encoded_items.json
   def create
     @encoded_item = EncodedItem.new(encoded_item_params)
@@ -29,19 +25,6 @@ class EncodedItemsController < ApplicationController
         format.json { render :show, status: :created, location: @encoded_item }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @encoded_item.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /encoded_items/1 or /encoded_items/1.json
-  def update
-    respond_to do |format|
-      if @encoded_item.update(encoded_item_params)
-        format.html { redirect_to @encoded_item, notice: "Encoded item was successfully updated." }
-        format.json { render :show, status: :ok, location: @encoded_item }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @encoded_item.errors, status: :unprocessable_entity }
       end
     end
