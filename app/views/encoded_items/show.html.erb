@@ -3,7 +3,6 @@
 <%= render @encoded_item %>
 
 <div>
-  <%= link_to "Edit this encoded item", edit_encoded_item_path(@encoded_item) %> |
   <%= link_to "Back to encoded items", encoded_items_path %>
 
   <%= button_to "Destroy this encoded item", @encoded_item, method: :delete %>
