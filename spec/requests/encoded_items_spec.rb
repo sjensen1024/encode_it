@@ -47,7 +47,7 @@ RSpec.describe "/encoded_items", type: :request do
   end
 
   describe "POST /create" do
-    context "with valid parameters" do
+    context "with a successful save" do
       it "creates a new EncodedItem" do
         expect {
           post encoded_items_url, params: { encoded_item: valid_attributes }
@@ -57,6 +57,15 @@ RSpec.describe "/encoded_items", type: :request do
       it "redirects to the created encoded_item" do
         post encoded_items_url, params: { encoded_item: valid_attributes }
         expect(response).to redirect_to(encoded_item_url(EncodedItem.last))
+      end
+    end
+
+    context 'with an unsuccessful save' do
+      before { allow_any_instance_of(EncodedItem).to receive(:save).and_return(false) }
+
+      it 'should have a status of unprocessable entity' do
+        post encoded_items_url, params: { encoded_item: valid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

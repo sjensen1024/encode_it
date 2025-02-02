@@ -11,7 +11,7 @@ RSpec.describe "/decoded_items", type: :request do
     describe "GET /index" do
         it "renders a successful response" do
           EncodedItem.create! valid_attributes
-          get encoded_items_url
+          get decoded_items_url
           expect(response).to be_successful
         end
       end
@@ -19,7 +19,7 @@ RSpec.describe "/decoded_items", type: :request do
       describe "GET /show" do
         it "renders a successful response" do
           encoded_item = EncodedItem.create! valid_attributes
-          get encoded_item_url(encoded_item)
+          get decoded_item_url(encoded_item)
           expect(response).to be_successful
         end
       end
