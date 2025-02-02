@@ -62,7 +62,7 @@ RSpec.describe "/encoded_items", type: :request do
 
     context 'with an unsuccessful save' do
       before { allow_any_instance_of(EncodedItem).to receive(:save).and_return(false) }
-      
+
       it 'should have a status of unprocessable entity' do
         post encoded_items_url, params: { encoded_item: valid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
