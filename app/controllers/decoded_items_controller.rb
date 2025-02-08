@@ -1,4 +1,6 @@
 class DecodedItemsController < ApplicationController
+    before_action :enforce_main_encoded_item_existence
+
     def index
         encoded_items = EncodedItem.all
 

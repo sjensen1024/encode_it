@@ -3,8 +3,17 @@ class EncodedItem < ApplicationRecord
     PLACEMENT_MAX = 9
     CYCLE_MIN = 2
     CYCLE_MAX = 10
+    MAIN_DESCRIPTOR = 'MAIN ENCODED ITEM'
 
     before_create :apply_encoding_for_create
+
+    scope :with_main_descriptor, lambda {
+        where(descriptor: MAIN_DESCRIPTOR)
+    }
+
+    def self.does_main_item_exist?
+        with_main_descriptor.exists?
+    end
 
     def decode_value
         parsed_placement = decode_placement.to_i
