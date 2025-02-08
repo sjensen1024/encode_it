@@ -53,7 +53,7 @@ jobs:
       - name: Lint code for consistent style
         run: ruby bin/rubocop -f github
 
-  rspec_and_simplecov:
+  tests_and_coverage:
     runs-on: ubuntu-latest
 
     # services:
