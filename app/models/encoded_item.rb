@@ -10,9 +10,9 @@ class EncodedItem < ApplicationRecord
         parsed_placement = decode_placement.to_i
         cycles = self.value[parsed_placement].to_i
         decoded_value = self.value
-        
+
         apply_base64_in_cycles(
-            cycles, 
+            cycles,
             decoded_value[0, parsed_placement] + decoded_value[parsed_placement + 1, decoded_value.length],
             :decode64
         )

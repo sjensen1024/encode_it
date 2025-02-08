@@ -16,7 +16,7 @@ class DecodedItemsController < ApplicationController
     def format_item_with_decoded_value(encoded_item)
         {
             descriptor: encoded_item.descriptor,
-            value: encoded_item.decode_value.force_encoding('ISO-8859-1').encode('UTF-8')
+            value: encoded_item.decode_value.force_encoding("ISO-8859-1").encode("UTF-8")
         }
     end
 end
