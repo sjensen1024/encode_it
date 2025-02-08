@@ -7,11 +7,19 @@ class EncodedItem < ApplicationRecord
     before_create :apply_encoding_for_create
 
     def decode_value
-        parsed_placement = Base64.decode64(self.placement).to_i
+        parsed_placement = decode_placement.to_i
         cycles = self.value[parsed_placement].to_i
-        decoded_value = self.value[0, parsed_placement] + self.value[parsed_placement + 1, self.value.length]
+        decoded_value = self.value
         
-        apply_base64_in_cycles(cycles, decoded_value, :decode64)
+        apply_base64_in_cycles(
+            cycles, 
+            decoded_value[0, parsed_placement] + decoded_value[parsed_placement + 1, decoded_value.length],
+            :decode64
+        )
+    end
+
+    def decode_placement
+        Base64.decode64(self.placement)
     end
 
     private
