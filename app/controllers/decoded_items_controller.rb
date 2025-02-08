@@ -7,7 +7,6 @@ class DecodedItemsController < ApplicationController
 
     def show
         encoded_item = EncodedItem.find(params[:id])
-        @decoded_item = encoded_item.decode_value
 
         render json: format_item_with_decoded_value(encoded_item)
     end
@@ -17,7 +16,7 @@ class DecodedItemsController < ApplicationController
     def format_item_with_decoded_value(encoded_item)
         {
             descriptor: encoded_item.descriptor,
-            value: encoded_item.decode_value
+            value: encoded_item.decode_value.force_encoding("ISO-8859-1").encode("UTF-8")
         }
     end
 end
