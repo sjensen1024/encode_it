@@ -5,27 +5,47 @@ RSpec.describe EncodedItem, type: :model do
     EncodedItem.create(descriptor: 'Phrase', value: 'Hello world!')
   end
 
-  context 'what we expect to happen on create' do
-    it 'should have a descriptor of Phrase' do
-      expect(encoded_item.descriptor).to eq('Phrase')
-    end
+  context 'creating and decoding' do
+    (EncodedItem::PLACEMENT_MIN...EncodedItem::PLACEMENT_MAX).each do |stub_rand_placement|
+      (EncodedItem::CYCLE_MIN...EncodedItem::CYCLE_MAX).each do |stub_rand_cycle|
+        context "unencoded placement is #{stub_rand_placement}, unencoded cycle is #{stub_rand_cycle}" do
+          before do
+            allow_any_instance_of(EncodedItem).to receive(:rand).with(
+              EncodedItem::PLACEMENT_MIN..EncodedItem::PLACEMENT_MAX
+            ).and_return(stub_rand_placement)
 
-    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].each do |integer|
-      it "when rand returns #{integer}, it should set placement to an encoded version of #{integer}" do
-        allow_any_instance_of(EncodedItem).to receive(:rand).and_return(integer)
-        expect(encoded_item.placement).to eq(Base64.encode64(integer.to_s))
+            allow_any_instance_of(EncodedItem).to receive(:rand).with(
+              EncodedItem::CYCLE_MIN..EncodedItem::CYCLE_MAX
+            ).and_return(stub_rand_cycle)
+          end
+
+          let(:expected_encoded_value) do
+            expected_value = 'Hello world!'
+            (0...stub_rand_cycle).each do
+              expected_value = Base64.encode64(expected_value)
+            end
+            expected_value.insert(stub_rand_placement, stub_rand_cycle.to_s)
+          end
+
+          it 'should have a descriptor of Phrase' do
+            expect(encoded_item.descriptor).to eq('Phrase')
+          end
+
+          it "placement should be an encoded version of #{stub_rand_placement}" do
+            expect(encoded_item.placement).to eq(Base64.encode64(stub_rand_placement.to_s))
+          end
+
+          it 'value should be an even more encoded version of "Hello world!" with cycles injected at the index of placement' do
+            expect(encoded_item.value).not_to include('Hello world!')
+            expect(encoded_item.value).to eq(expected_encoded_value)
+          end
+
+          it 'should return "Hello world!" when we call decode_value WITHOUT changing the actual saved value' do
+            expect(encoded_item.decode_value).to eq('Hello world!')
+            expect(encoded_item.value).to eq(expected_encoded_value)
+          end
+        end
       end
-    end
-
-    it 'should set the value to the encoded version of Hello world!' do
-      encoded_value = Base64.encode64('Hello world!')
-      expect(encoded_item.value).to eq(encoded_value)
-    end
-  end
-
-  describe :decode_value do
-    it 'should get the decoded version of the value' do
-      expect(encoded_item.decode_value).to eq('Hello world!')
     end
   end
 end
