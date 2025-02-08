@@ -53,7 +53,7 @@ jobs:
       - name: Lint code for consistent style
         run: ruby bin/rubocop -f github
 
-  test:
+  tests_and_coverage:
     runs-on: ubuntu-latest
 
     # services:
@@ -89,4 +89,11 @@ jobs:
         with:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: ${{ github.workspace }}/coverage
           if-no-files-found: ignore
