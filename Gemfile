@@ -55,6 +55,10 @@ group :development, :test do
   gem "rspec-rails"
 
   gem "simplecov"
+
+  gem "factory_bot_rails"
+
+  gem "forgery"
 end
 
 group :development do
