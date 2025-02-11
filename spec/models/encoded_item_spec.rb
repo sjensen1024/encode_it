@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe EncodedItem, type: :model do
-
   context 'testing the factory' do
     it_behaves_like "factory defaults for building and creating succeed for factory type", :encoded_item
   end
@@ -56,6 +55,5 @@ RSpec.describe EncodedItem, type: :model do
   end
 
   context 'does_main_item_exist?' do
-
   end
 end
