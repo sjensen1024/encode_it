@@ -56,7 +56,9 @@ group :development, :test do
 
   gem "simplecov"
 
-  gem "factory_bot"
+  gem "factory_bot_rails"
+
+  gem "forgery"
 end
 
 group :development do

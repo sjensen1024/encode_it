@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe EncodedItem, type: :model do
+
+  context 'testing the factory' do
+    it_behaves_like "factory defaults for building and creating succeed for factory type", :encoded_item
+  end
+
+
   let(:encoded_item) do
-    EncodedItem.create(descriptor: 'Phrase', value: 'Hello world!')
+    FactoryBot.create(:encoded_item, descriptor: 'Phrase', value: 'Hello world!')
   end
 
   context 'creating and decoding' do
@@ -47,5 +53,9 @@ RSpec.describe EncodedItem, type: :model do
         end
       end
     end
+  end
+
+  context 'does_main_item_exist?' do
+
   end
 end
