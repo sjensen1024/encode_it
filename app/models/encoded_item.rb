@@ -7,6 +7,7 @@ class EncodedItem < ApplicationRecord
 
     before_create :apply_encoding_for_create
 
+    # TODO: maybe this should be a find_by method call to just get the record?
     scope :with_main_descriptor, lambda {
         where(descriptor: MAIN_DESCRIPTOR)
     }

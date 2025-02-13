@@ -5,12 +5,11 @@ RSpec.describe EncodedItem, type: :model do
     it_behaves_like "factory defaults for building and creating succeed for factory type", :encoded_item
   end
 
-
-  let(:encoded_item) do
-    FactoryBot.create(:encoded_item, descriptor: 'Phrase', value: 'Hello world!')
-  end
-
   context 'creating and decoding' do
+    let(:encoded_item) do
+      FactoryBot.create(:encoded_item, descriptor: 'Phrase', value: 'Hello world!')
+    end
+
     (EncodedItem::PLACEMENT_MIN...EncodedItem::PLACEMENT_MAX).each do |stub_rand_placement|
       (EncodedItem::CYCLE_MIN...EncodedItem::CYCLE_MAX).each do |stub_rand_cycle|
         context "unencoded placement is #{stub_rand_placement}, unencoded cycle is #{stub_rand_cycle}" do
