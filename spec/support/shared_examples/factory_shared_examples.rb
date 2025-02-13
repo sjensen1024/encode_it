@@ -3,6 +3,6 @@ shared_examples "factory defaults for building and creating succeed for factory 
         expect { FactoryBot.build(factory_type) }.not_to raise_error
     end
     it "should NOT raise any errors on default FactoryBot.create" do
-        expect { FactoryBot.build(factory_type) }.not_to raise_error
+        expect { FactoryBot.create(factory_type) }.not_to raise_error
     end
 end
