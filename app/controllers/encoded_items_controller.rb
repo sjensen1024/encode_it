@@ -13,7 +13,7 @@ class EncodedItemsController < ApplicationController
 
   # GET /encoded_items/new
   def new
-    @does_main_item_exist = EncodedItem.does_main_item_exist?
+    @does_main_item_exist = EncodedItem.does_item_with_main_descriptor_exist?
     @encoded_item = EncodedItem.new
     @encoded_item.descriptor = EncodedItem::MAIN_DESCRIPTOR unless @does_main_item_exist
   end
@@ -22,7 +22,7 @@ class EncodedItemsController < ApplicationController
   def create
     @encoded_item = EncodedItem.new(encoded_item_params)
 
-    #TODO: Determing if we should do anything extra on create for enforcing the main item.
+    # TODO: Determing if we should do anything extra on create for enforcing the main item.
 
     respond_to do |format|
       if @encoded_item.save
