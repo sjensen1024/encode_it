@@ -22,8 +22,6 @@ class EncodedItemsController < ApplicationController
   def create
     @encoded_item = EncodedItem.new(encoded_item_params)
 
-    # TODO: Determing if we should do anything extra on create for enforcing the main item.
-
     respond_to do |format|
       if @encoded_item.save
         format.html { redirect_to @encoded_item, notice: "Encoded item was successfully created." }

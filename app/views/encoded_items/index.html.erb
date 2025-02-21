@@ -1,16 +1,75 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Encoded items" %>
+<% content_for :title, "Encode It" %>
 
-<h1>Encoded items</h1>
+<h1>My Encoded Items</h1>
+
+<%= link_to "Add a New Encoded Item", new_encoded_item_path %>
+
+<button onclick="showMainSecretEntryDialog()">Click here to decode the items.</button>
+
+<dialog id="mainSecretEntryDialog" >
+  <p>Enter the main secret to decode the items on this page.</p>
+  <label>Main Secret:</label><br>
+  <input autofocus type="text" id="mainSecretEntryText"><br>
+  <button onclick='processMainSecretEntrySubmission()'>Submit</button>
+  <button onclick='hideMainSecretEntryDialog()'>Cancel</button>
+</dialog>
 
 <div id="encoded_items">
-  <% @encoded_items.each do |encoded_item| %>
-    <%= render encoded_item %>
-    <p>
-      <%= link_to "Show this encoded item", encoded_item %>
-    </p>
-  <% end %>
+  <table>
+    <tr>
+      <th>Descriptor</th>
+      <th>Encoded Value</th>
+      <th>Decoded Value</th>
+    </tr>
+    <% @encoded_items.each do |encoded_item| %>
+      <tr>
+        <td> <%= encoded_item.descriptor %> </td>
+        <td> <%= encoded_item.value %> </td>
+        <td> 
+          <span id="decoded_item_<%= encoded_item.id %>"> 
+            ...
+          </span> 
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
-<%= link_to "New encoded item", new_encoded_item_path %>
+<% # TODO: Get this script tag off of this page. Put it into its own js file. Also, make it cleaner. %>
+<script>
+      function showMainSecretEntryDialog() {
+        document.getElementById('mainSecretEntryDialog').showModal();
+      };
+
+      function hideMainSecretEntryDialog() {
+        document.getElementById('mainSecretEntryDialog').close();
+      }
+
+      function processMainSecretEntrySubmission() {
+        entryBoxValue = document.getElementById('mainSecretEntryText').value;
+        
+        let requestObject = new XMLHttpRequest();
+        let url = '/decoded_items?main_secret_entry=' + entryBoxValue;
+        requestObject.open("GET", url, true);
+        requestObject.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+              parsedResponse = JSON.parse(this.responseText);
+              
+              if(!parsedResponse.allowed){
+                alert('You did not enter the correct value for the main secret. Decoding failed.');
+                return;
+              }
+
+              for (let i = 0; i < parsedResponse.decoded_items.length; i++) {
+                decodedItem = parsedResponse.decoded_items[i];
+                element = document.getElementById('decoded_item_' + decodedItem.id);
+                element.innerHTML = decodedItem.value;
+              }
+          }
+        }
+        requestObject.send();
+        hideMainSecretEntryDialog();
+      }
+</script>
