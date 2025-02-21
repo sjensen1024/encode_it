@@ -1,4 +1,5 @@
 class EncodedItemsController < ApplicationController
+  before_action :enforce_main_encoded_item_existence, except: %i[ new create ]
   before_action :set_encoded_item, only: %i[ show destroy ]
 
   # GET /encoded_items or /encoded_items.json
@@ -12,7 +13,9 @@ class EncodedItemsController < ApplicationController
 
   # GET /encoded_items/new
   def new
+    @does_main_item_exist = EncodedItem.does_item_with_main_descriptor_exist?
     @encoded_item = EncodedItem.new
+    @encoded_item.descriptor = EncodedItem::MAIN_DESCRIPTOR unless @does_main_item_exist
   end
 
   # POST /encoded_items or /encoded_items.json

@@ -2,10 +2,22 @@
 
 <h1>New encoded item</h1>
 
+<% unless @does_main_item_exist %>
+
+  <b>
+    Before using anything else in this application,
+    you must enter a value to encode for MAIN ENCODED ITEM,
+    which you can do below.
+    Remember what you enter here,
+    because you will need to enter it for creating and decoding other items.
+  </b>
+  </br>
+<% end %>
+
 <%= render "form", encoded_item: @encoded_item %>
 
 <br>
 
 <div>
-  <%= link_to "Back to encoded items", encoded_items_path %>
+  <%= (link_to "Back to encoded items", encoded_items_path) if @does_main_item_exist %>
 </div>

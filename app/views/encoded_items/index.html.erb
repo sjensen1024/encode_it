@@ -1,16 +1,40 @@
+<%= javascript_include_tag 'encoded_items/index.js' %>
+
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Encoded items" %>
+<% content_for :title, "Encode It" %>
 
-<h1>Encoded items</h1>
+<h1>My Encoded Items</h1>
+
+<%= link_to "Add a New Encoded Item", new_encoded_item_path %>
+
+<button onclick="showMainSecretEntryDialog()">Click here to decode the items.</button>
+
+<dialog id="mainSecretEntryDialog" >
+  <p>Enter the main secret to decode the items on this page.</p>
+  <label>Main Secret:</label><br>
+  <input autofocus type="text" id="mainSecretEntryText"><br>
+  <button onclick='processMainSecretEntrySubmission()'>Submit</button>
+  <button onclick='hideMainSecretEntryDialog()'>Cancel</button>
+</dialog>
 
 <div id="encoded_items">
-  <% @encoded_items.each do |encoded_item| %>
-    <%= render encoded_item %>
-    <p>
-      <%= link_to "Show this encoded item", encoded_item %>
-    </p>
-  <% end %>
+  <table>
+    <tr>
+      <th>Descriptor</th>
+      <th>Encoded Value</th>
+      <th>Decoded Value</th>
+    </tr>
+    <% @encoded_items.each do |encoded_item| %>
+      <tr>
+        <td> <%= encoded_item.descriptor %> </td>
+        <td> <%= encoded_item.value %> </td>
+        <td> 
+          <span id="decoded_item_<%= encoded_item.id %>"> 
+            ...
+          </span> 
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
-
-<%= link_to "New encoded item", new_encoded_item_path %>

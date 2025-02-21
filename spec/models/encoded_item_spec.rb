@@ -5,12 +5,29 @@ RSpec.describe EncodedItem, type: :model do
     it_behaves_like "factory defaults for building and creating succeed for factory type", :encoded_item
   end
 
+  describe ".does_item_with_main_descriptor_exist?" do
+    it 'should return true if an item with the main descriptor is found' do
+      allow(EncodedItem).to receive(:find_by).with(
+        { descriptor: EncodedItem::MAIN_DESCRIPTOR }
+      ).and_return(FactoryBot.build(:encoded_item))
 
-  let(:encoded_item) do
-    FactoryBot.create(:encoded_item, descriptor: 'Phrase', value: 'Hello world!')
+      expect(EncodedItem.does_item_with_main_descriptor_exist?).to be(true)
+    end
+
+    it 'should return false if an item with the main descriptor is not found' do
+      allow(EncodedItem).to receive(:find_by).with(
+        { descriptor: EncodedItem::MAIN_DESCRIPTOR }
+      ).and_return(nil)
+
+      expect(EncodedItem.does_item_with_main_descriptor_exist?).to be(false)
+    end
   end
 
   context 'creating and decoding' do
+    let(:encoded_item) do
+      FactoryBot.create(:encoded_item, descriptor: 'Phrase', value: 'Hello world!')
+    end
+
     (EncodedItem::PLACEMENT_MIN...EncodedItem::PLACEMENT_MAX).each do |stub_rand_placement|
       (EncodedItem::CYCLE_MIN...EncodedItem::CYCLE_MAX).each do |stub_rand_cycle|
         context "unencoded placement is #{stub_rand_placement}, unencoded cycle is #{stub_rand_cycle}" do
@@ -52,8 +69,5 @@ RSpec.describe EncodedItem, type: :model do
         end
       end
     end
-  end
-
-  context 'does_main_item_exist?' do
   end
 end
