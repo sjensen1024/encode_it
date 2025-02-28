@@ -59,10 +59,12 @@ function processMainSecretEntrySubmission() {
                 element.innerHTML = decodedItem.value;
                 if (i == parsedResponse.decoded_items.length - 1){
                     hideLoadingMaskDialog();
+                    document.getElementById("showDecodedValuesButton").disabled = true;
                 }
             }
         }
     }
     requestObject.send();
     hideMainSecretEntryDialog();
+    
 }

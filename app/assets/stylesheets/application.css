@@ -9,12 +9,17 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+ body {
+  background-color: #dce9ec;
+  font-family: 'Helvetica', sans-serif;
+  padding-left: 20px;
+ }
+
  .header1 {
-    font-family:'Helvetica', sans-serif
+    font-size: 42px;
  }
 
  table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 85%;
   }
@@ -36,9 +41,24 @@
   }
   
   tr:nth-child(even) {
-    background-color: #a8dcff;
+    background-color: #596168;
   }
 
   tr:nth-child(odd) {
     background-color: #e7f6ff;
+  }
+
+  .nav_menu ol {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .nav_menu li {
+    display: inline-block;
+  }
+
+  .nav_menu button {
+    font-weight: bold;
+    background-color: #9ac1da;
+    border-color: #e7f6ff;
   }

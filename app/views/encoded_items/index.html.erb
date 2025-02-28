@@ -6,9 +6,18 @@
 
 <h1 class="header1">My Encoded Items</h1>
 
-<%= link_to "Add a New Encoded Item", new_encoded_item_path %>
 
-<button onclick="showMainSecretEntryDialog()">Click here to decode the items.</button>
+<nav class='nav_menu'>
+  <ol>
+    <li>
+      <button id="showDecodedValuesButton" onclick="showMainSecretEntryDialog()">Show Decoded Values</button>
+    </li>
+    <li>
+      <%= button_to "Add a New Encoded Item", new_encoded_item_path, method: :get %>
+    </li>
+  </ol>
+</nav>
+
 
 <dialog id="mainSecretEntryDialog">
   <p>Enter the main secret:</p>
@@ -41,7 +50,7 @@
         <td> <%= encoded_item.value %> </td>
         <td> 
           <span id="decoded_item_<%= encoded_item.id %>"> 
-            ...
+            ?
           </span> 
         </td>
       </tr>
