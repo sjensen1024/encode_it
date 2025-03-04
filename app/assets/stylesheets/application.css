@@ -19,29 +19,39 @@
     font-size: 42px;
  }
 
+ .hidden_encoded_value {
+    font-size: 20px;
+    font-weight: bold;
+ }
+
+ .revealed_encoded_value {
+  font-size: 16px;
+  font-weight: normal;
+ }
+
  table {
     border-collapse: collapse;
-    width: 85%;
+    width: 75%;
   }
   
   th {
-    border: 3px solid #516e77;
+    border: 1px solid #bfcfd4;
     text-align: center;
     padding: 10px;
     min-width: 200px;
     font-size: 20px;
-    background-color: #86989e;
+    background-color: #a9c4d3;
   }
 
   td {
-    border: 3px solid #bfcfd4;
+    border: 1px solid #bfcfd4;
     text-align: center;
     padding: 8px;
-    min-width: 200px;
+    min-width: 150px;
   }
   
   tr:nth-child(even) {
-    background-color: #596168;
+    background-color: #818b94;
   }
 
   tr:nth-child(odd) {

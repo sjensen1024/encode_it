@@ -57,6 +57,7 @@ function processMainSecretEntrySubmission() {
                 decodedItem = parsedResponse.decoded_items[i];
                 element = document.getElementById('decoded_item_' + decodedItem.id);
                 element.innerHTML = decodedItem.value;
+                element.className = "revealed_encoded_value";
                 if (i == parsedResponse.decoded_items.length - 1){
                     hideLoadingMaskDialog();
                     document.getElementById("showDecodedValuesButton").disabled = true;
