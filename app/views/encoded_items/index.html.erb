@@ -4,19 +4,38 @@
 
 <% content_for :title, "Encode It" %>
 
-<h1>My Encoded Items</h1>
+<h1 class="header1">My Encoded Items</h1>
 
-<%= link_to "Add a New Encoded Item", new_encoded_item_path %>
 
-<button onclick="showMainSecretEntryDialog()">Click here to decode the items.</button>
+<nav class='nav_menu'>
+  <ol>
+    <li>
+      <button id="showDecodedValuesButton" onclick="showMainSecretEntryDialog()">Show Decoded Values</button>
+    </li>
+    <li>
+      <%= button_to "Add a New Encoded Item", new_encoded_item_path, method: :get %>
+    </li>
+  </ol>
+</nav>
 
-<dialog id="mainSecretEntryDialog" >
-  <p>Enter the main secret to decode the items on this page.</p>
-  <label>Main Secret:</label><br>
-  <input autofocus type="text" id="mainSecretEntryText"><br>
+
+<dialog id="mainSecretEntryDialog">
+  <p>Enter the main secret:</p>
+  <input autofocus type="text" id="mainSecretEntryText"><br><br>
   <button onclick='processMainSecretEntrySubmission()'>Submit</button>
   <button onclick='hideMainSecretEntryDialog()'>Cancel</button>
 </dialog>
+
+<dialog id="accessDeniedDialog">
+  <p>You did not enter the correct secret. Decoding failed.</p>
+  <button onclick='reopenSecretEntryFromAccessDenied()'>Try Agin</button>
+  <button onclick='hideAccessDeniedDialog()'>Cancel</button>
+</dialog>
+
+<dialog id="loadingMaskDialog">
+  <p>Please wait...</p>
+</dialog>
+
 
 <div id="encoded_items">
   <table>
@@ -30,8 +49,8 @@
         <td> <%= encoded_item.descriptor %> </td>
         <td> <%= encoded_item.value %> </td>
         <td> 
-          <span id="decoded_item_<%= encoded_item.id %>"> 
-            ...
+          <span id="decoded_item_<%= encoded_item.id %>" class="hidden_encoded_value"> 
+            ?
           </span> 
         </td>
       </tr>
