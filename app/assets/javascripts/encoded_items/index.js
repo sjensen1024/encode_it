@@ -67,5 +67,31 @@ function processMainSecretEntrySubmission() {
     }
     requestObject.send();
     hideMainSecretEntryDialog();
-    
+}
+
+function deleteEncodedItem(encodedItemId){
+    if (!confirm("Are you sure you want to delete this item? This cannot be undone.")) {
+        return;
+    }
+
+    showLoadingMaskDialog();
+    authenticityToken = document.getElementById('formAuthenticityToken').value;
+
+    let requestObject = new XMLHttpRequest();
+    let url = '/encoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken;
+    requestObject.open("DELETE", url, true);
+
+    requestObject.onreadystatechange = function () {
+        if (this.readyState != 4) {
+            return;
+        }
+        if (this.status != 200){
+            hideLoadingMaskDialog();
+            alert("There was an error in deleting this item.");
+            return;
+        }
+
+        location.reload();
+    }
+    requestObject.send();
 }
