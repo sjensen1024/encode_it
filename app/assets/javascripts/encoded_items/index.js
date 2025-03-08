@@ -22,6 +22,22 @@ function hideLoadingMaskDialog(){
     document.getElementById("loadingMaskDialog").close();
 }
 
+function hideDeleteItemDialog() {
+    document.getElementById("deleteItemDialog").close();
+}
+
+function showDeleteItemDialogWithItemId(itemId){
+    yesButton = document.getElementById("deleteItemDialogYesButton");
+    yesButton.setAttribute('willDeleteItemId', itemId);
+    document.getElementById("deleteItemDialog").showModal();
+}
+
+function deleteItemFromButtonClick(){
+    hideDeleteItemDialog();
+    yesButton = document.getElementById("deleteItemDialogYesButton");
+    deleteEncodedItem(yesButton.getAttribute('willDeleteItemId'));
+}
+
 function reopenSecretEntryFromAccessDenied() {
     hideAccessDeniedDialog();
     showMainSecretEntryDialog();
@@ -34,6 +50,7 @@ function getMainSecretEntry(){
 function clearMainSecretEntry(){
     document.getElementById("mainSecretEntryText").value = "";
 }
+
 
 function processMainSecretEntrySubmission() {
     showLoadingMaskDialog();
@@ -67,5 +84,27 @@ function processMainSecretEntrySubmission() {
     }
     requestObject.send();
     hideMainSecretEntryDialog();
-    
+}
+
+function deleteEncodedItem(encodedItemId){
+    showLoadingMaskDialog();
+    authenticityToken = document.getElementById('formAuthenticityToken').value;
+
+    let requestObject = new XMLHttpRequest();
+    let url = '/encoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken;
+    requestObject.open("DELETE", url, true);
+
+    requestObject.onreadystatechange = function () {
+        if (this.readyState != 4) {
+            return;
+        }
+        if (this.status != 200){
+            hideLoadingMaskDialog();
+            alert("There was an error in deleting this item.");
+            return;
+        }
+
+        location.reload();
+    }
+    requestObject.send();
 }
