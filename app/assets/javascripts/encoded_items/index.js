@@ -22,6 +22,22 @@ function hideLoadingMaskDialog(){
     document.getElementById("loadingMaskDialog").close();
 }
 
+function hideDeleteItemDialog() {
+    document.getElementById("deleteItemDialog").close();
+}
+
+function showDeleteItemDialogWithItemId(itemId){
+    yesButton = document.getElementById("deleteItemDialogYesButton");
+    yesButton.setAttribute('willDeleteItemId', itemId);
+    document.getElementById("deleteItemDialog").showModal();
+}
+
+function deleteItemFromButtonClick(){
+    hideDeleteItemDialog();
+    yesButton = document.getElementById("deleteItemDialogYesButton");
+    deleteEncodedItem(yesButton.getAttribute('willDeleteItemId'));
+}
+
 function reopenSecretEntryFromAccessDenied() {
     hideAccessDeniedDialog();
     showMainSecretEntryDialog();
@@ -34,6 +50,7 @@ function getMainSecretEntry(){
 function clearMainSecretEntry(){
     document.getElementById("mainSecretEntryText").value = "";
 }
+
 
 function processMainSecretEntrySubmission() {
     showLoadingMaskDialog();
@@ -70,10 +87,6 @@ function processMainSecretEntrySubmission() {
 }
 
 function deleteEncodedItem(encodedItemId){
-    if (!confirm("Are you sure you want to delete this item? This cannot be undone.")) {
-        return;
-    }
-
     showLoadingMaskDialog();
     authenticityToken = document.getElementById('formAuthenticityToken').value;
 

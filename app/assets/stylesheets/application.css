@@ -51,11 +51,19 @@
   }
   
   tr:nth-child(even) {
-    background-color: #818b94;
+    background-color: #aeb8c2;
   }
 
   tr:nth-child(odd) {
     background-color: #e7f6ff;
+  }
+
+  .td-action-button {
+    font-weight: bold;
+    background-color: #a4b5c2;
+    border-color: #e7f6ff;
+    padding: 5px;
+    border-width: 4px;
   }
 
   .nav_menu ol {
