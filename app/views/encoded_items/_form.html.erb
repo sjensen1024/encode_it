@@ -12,16 +12,23 @@
   <% end %>
 
   <div>
-    <%= form.label :descriptor, style: "display: block" %>
-    <%= form.text_field :descriptor %>
-  </div>
+    <div>
+      <b><%= form.label "Descriptor:", class: "form-label" %></b>
+      <%= form.text_field :descriptor, readonly: !@does_main_item_exist %>
+    </div>
 
-  <div>
-    <%= form.label :value, style: "display: block" %>
-    <%= form.text_field :value %>
-  </div>
+    <div>
+      <b><%= form.label :value, "Value To Encode:", class: "form-label" %></b>
+      <%= form.text_field :value %>
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <br>
+
+    <div>
+      <%= form.submit "Save Item", class: "td-action-button"%>
+      <%if @does_main_item_exist %>
+          <button class="td-action-button" onclick="window.location='/encoded_items'" >Cancel and Go Back</button>
+      <% end %>
+    </div>
   </div>
 <% end %>
