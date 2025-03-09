@@ -80,3 +80,11 @@
     background-color: #9ac1da;
     border-color: #e7f6ff;
   }
+
+  .form-label {
+    display: inline-block;
+    font-weight: bold;
+    width: 140px;
+    text-align: right;
+    margin-bottom: 10px;
+  }

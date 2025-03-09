@@ -24,7 +24,7 @@ class EncodedItemsController < ApplicationController
 
     respond_to do |format|
       if @encoded_item.save
-        format.html { redirect_to @encoded_item, notice: "Encoded item was successfully created." }
+        format.html { redirect_to encoded_items_url, notice: "Encoded item was successfully created." }
         format.json { render :show, status: :created, location: @encoded_item }
       else
         format.html { render :new, status: :unprocessable_entity }

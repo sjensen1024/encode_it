@@ -60,7 +60,7 @@ RSpec.describe "/encoded_items", type: :request do
 
         it "redirects to the created encoded_item" do
           post encoded_items_url, params: { encoded_item: valid_attributes }
-          expect(response).to redirect_to(encoded_item_url(EncodedItem.last))
+          expect(response).to redirect_to(encoded_items_url)
         end
       end
 
