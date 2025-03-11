@@ -32,9 +32,7 @@
   <button onclick='hideAccessDeniedDialog()'>Cancel</button>
 </dialog>
 
-<dialog id="loadingMaskDialog">
-  <p>Please wait...</p>
-</dialog>
+<%= render partial: 'encoded_items/loading_mask' %>
 
 <dialog id="deleteItemDialog">
   <p>Are you sure you want to delete this item? This cannot be undone.</p>
