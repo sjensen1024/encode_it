@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'encoded_items/new.js' %>
+
 <% content_for :title, "New encoded item" %>
 
 <h1 class="header1">New Encoded Item</h1>
@@ -16,5 +18,7 @@
   </b>
   </br>
 <% end %>
+
+<%= render partial: 'encoded_items/loading_mask' %>
 
 <%= render "form", encoded_item: @encoded_item %>

@@ -14,14 +14,6 @@ function hideAccessDeniedDialog() {
     document.getElementById("accessDeniedDialog").close();
 }
 
-function showLoadingMaskDialog(){
-    document.getElementById("loadingMaskDialog").showModal();
-}
-
-function hideLoadingMaskDialog(){
-    document.getElementById("loadingMaskDialog").close();
-}
-
 function hideDeleteItemDialog() {
     document.getElementById("deleteItemDialog").close();
 }

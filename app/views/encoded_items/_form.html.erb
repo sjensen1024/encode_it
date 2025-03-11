@@ -1,4 +1,4 @@
-<%= form_with(model: encoded_item) do |form| %>
+<%= form_with(model: encoded_item, id: 'encodedItemForm') do |form| %>
   <% if encoded_item.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(encoded_item.errors.count, "error") %> prohibited this encoded_item from being saved:</h2>
@@ -27,7 +27,7 @@
     <div>
       <%= form.submit "Save Item", class: "td-action-button"%>
       <%if @does_main_item_exist %>
-          <button class="td-action-button" onclick="window.location='/encoded_items'" >Cancel and Go Back</button>
+          <button id="cancelButton" class="td-action-button" onclick="showLoadingMaskAndRedirectToList()" >Cancel and Go Back</button>
       <% end %>
     </div>
   </div>
