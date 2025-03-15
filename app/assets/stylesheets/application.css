@@ -10,9 +10,19 @@
  */
 
  body {
-  background-color: #dce9ec;
+  background-color: #eafbff;
   font-family: 'Helvetica', sans-serif;
   padding-left: 20px;
+  
+ }
+
+ dialog {
+  background-color: #e6f9ff;
+  padding: 25px;
+  border: 1px solid #dddddd;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: bold;
+  text-align: center;
  }
 
  .header1 {
@@ -35,12 +45,12 @@
   }
   
   th {
-    border: 1px solid #bfcfd4;
+    border: 1px solid #cfdfe4;
     text-align: center;
     padding: 10px;
     min-width: 200px;
     font-size: 20px;
-    background-color: #a9c4d3;
+    background-color: #c1e0f1;
   }
 
   td {
@@ -51,7 +61,7 @@
   }
   
   tr:nth-child(even) {
-    background-color: #aeb8c2;
+    background-color: #deecf5;
   }
 
   tr:nth-child(odd) {
@@ -60,10 +70,10 @@
 
   .td-action-button {
     font-weight: bold;
-    background-color: #a4b5c2;
+    background-color: #bed2e2;
     border-color: #e7f6ff;
     padding: 5px;
-    border-width: 4px;
+    border-width: 2px;
   }
 
   .nav_menu ol {
