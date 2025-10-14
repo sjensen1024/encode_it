@@ -11,9 +11,8 @@
 
  body {
   background-color: #eafbff;
-  font-family: 'Helvetica', sans-serif;
+  font-family: Arial, sans-serif;
   padding-left: 20px;
-  
  }
 
  dialog {
@@ -23,25 +22,53 @@
   font-family: 'Helvetica', sans-serif;
   font-weight: bold;
   text-align: center;
+  animation-name: standardFadeIn;
+  animation-duration: 1s;
  }
 
+@keyframes standardFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes delayedFadeIn {
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideAndFadeInHeader {
+  0% { 
+    transform: translateX(-100px);
+    opacity: 0;
+   }
+  100% { 
+    transform: translateX(0px);
+    opacity: 1; 
+  }
+}
+
  .header1 {
-    font-size: 42px;
+    font-size: 25px;
+    animation-name: slideAndFadeInHeader;
+    animation-duration: 2s;
  }
 
  .hidden_encoded_value {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
  }
 
  .revealed_encoded_value {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: normal;
  }
 
  table {
     border-collapse: collapse;
     width: 75%;
+    animation-name: delayedFadeIn;
+    animation-duration: 4s;
   }
   
   th {
@@ -49,7 +76,7 @@
     text-align: center;
     padding: 10px;
     min-width: 200px;
-    font-size: 20px;
+    font-size: 15px;
     background-color: #c1e0f1;
   }
 
@@ -58,6 +85,9 @@
     text-align: center;
     padding: 8px;
     min-width: 150px;
+    font-size: 12px;
+    animation-name: delayedFadeIn;
+    animation-duration: 6s
   }
   
   tr:nth-child(even) {
@@ -89,6 +119,9 @@
     font-weight: bold;
     background-color: #9ac1da;
     border-color: #e7f6ff;
+    font-size: 12px;
+    animation-name: delayedFadeIn;
+    animation-duration: 1s;
   }
 
   .form-label {
