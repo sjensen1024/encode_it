@@ -11,6 +11,8 @@
 
  body {
   background: linear-gradient(to bottom, rgb(49, 49, 49), rgb(15, 15, 15) );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   font-family: Arial, sans-serif;
   padding-left: 20px;
  }
