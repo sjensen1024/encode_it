@@ -10,13 +10,13 @@
  */
 
  body {
-  background-color: #eafbff;
+  background: linear-gradient(to bottom, rgb(49, 49, 49), rgb(15, 15, 15) );
   font-family: Arial, sans-serif;
   padding-left: 20px;
  }
 
  dialog {
-  background-color: #e6f9ff;
+  background-color: #d0dadd;
   padding: 25px;
   border: 1px solid #dddddd;
   font-family: 'Helvetica', sans-serif;
@@ -39,7 +39,7 @@
 
 @keyframes slideAndFadeInHeader {
   0% { 
-    transform: translateX(-100px);
+    transform: translateX(-500px);
     opacity: 0;
    }
   100% { 
@@ -49,9 +49,20 @@
 }
 
  .header1 {
-    font-size: 25px;
+    font-size: 55px;
+    font-weight: bold;
     animation-name: slideAndFadeInHeader;
     animation-duration: 2s;
+    color: #cfdfe4;
+ }
+
+ .subheader1 {
+  font-size: 20 px;
+  font-weight: bold;
+  animation-name: delayedFadeIn;
+  animation-duration: 4s;
+  color: #cfdfe4;
+  padding-left: 20px;
  }
 
  .hidden_encoded_value {
@@ -66,41 +77,45 @@
 
  table {
     border-collapse: collapse;
-    width: 75%;
     animation-name: delayedFadeIn;
     animation-duration: 4s;
+    height: 600px;
+    width: 1300px;
+    overflow: auto;
+    display: block;
+    box-shadow: 0 12px 18px rgba(2, 0, 12, 1);
   }
   
   th {
-    border: 1px solid #cfdfe4;
+    border: 1px solid #c1ced6;
     text-align: center;
     padding: 10px;
     min-width: 200px;
     font-size: 15px;
-    background-color: #c1e0f1;
+    background-color: #c1ced6;
   }
 
   td {
-    border: 1px solid #bfcfd4;
+    border: 3px solid #e4e4e4;
     text-align: center;
     padding: 8px;
     min-width: 150px;
     font-size: 12px;
     animation-name: delayedFadeIn;
-    animation-duration: 6s
+    animation-duration: 6s;
   }
   
   tr:nth-child(even) {
-    background-color: #deecf5;
+    background-color: #ebebeb;
   }
 
   tr:nth-child(odd) {
-    background-color: #e7f6ff;
+    background-color: #e3e3e3;
   }
 
   .td-action-button {
     font-weight: bold;
-    background-color: #bed2e2;
+    background-color: #c9d3dc;
     border-color: #e7f6ff;
     padding: 5px;
     border-width: 2px;
@@ -117,7 +132,7 @@
 
   .nav_menu button {
     font-weight: bold;
-    background-color: #9ac1da;
+    background-color: #c1ced6;
     border-color: #e7f6ff;
     font-size: 12px;
     animation-name: delayedFadeIn;
