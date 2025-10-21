@@ -10,68 +10,125 @@
  */
 
  body {
-  background-color: #eafbff;
-  font-family: 'Helvetica', sans-serif;
+  background: linear-gradient(to bottom, rgb(22, 21, 23), rgb(7, 6, 8) );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: Arial, sans-serif;
   padding-left: 20px;
-  
  }
 
  dialog {
-  background-color: #e6f9ff;
+  background-color: #b8c2c5;
   padding: 25px;
   border: 1px solid #dddddd;
   font-family: 'Helvetica', sans-serif;
   font-weight: bold;
   text-align: center;
+  animation-name: standardFadeIn;
+  animation-duration: 1s;
  }
 
+@keyframes standardFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes delayedFadeIn {
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideAndFadeInHeader {
+  0% { 
+    transform: translateX(-500px);
+    opacity: 0;
+   }
+  100% { 
+    transform: translateX(0px);
+    opacity: 1; 
+  }
+}
+
  .header1 {
-    font-size: 42px;
+    font-size: 55px;
+    font-weight: bold;
+    animation-name: slideAndFadeInHeader;
+    animation-duration: 2s;
+    color: #cfdfe4;
+ }
+
+ .subheader1 {
+  font-size: 20 px;
+  font-weight: bold;
+  animation-name: delayedFadeIn;
+  animation-duration: 3s;
+  color: #cfdfe4;
+  padding-left: 20px;
  }
 
  .hidden_encoded_value {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
  }
 
  .revealed_encoded_value {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: normal;
  }
 
+ 
+
  table {
     border-collapse: collapse;
-    width: 75%;
+    animation-name: delayedFadeIn;
+    animation-duration: 3s;
+    table-layout: fixed;
+    height: 600px;
+    width: 1300px;
+    overflow: auto;
+    display: block;
+    box-shadow: 0 12px 18px rgba(2, 0, 12, 1);
   }
   
   th {
-    border: 1px solid #cfdfe4;
+    border: 3px solid #c1ced6;
     text-align: center;
     padding: 10px;
     min-width: 200px;
-    font-size: 20px;
-    background-color: #c1e0f1;
+    max-width: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 15px;
+    background-color: #c1ced6;
   }
 
   td {
-    border: 1px solid #bfcfd4;
+    border: 3px solid #e4e4e4;
     text-align: center;
     padding: 8px;
-    min-width: 150px;
+    min-width: 200px;
+    max-width: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 12px;
+    animation-name: delayedFadeIn;
+    animation-duration: 4s;
   }
   
   tr:nth-child(even) {
-    background-color: #deecf5;
+    background-color: #ebebeb;
   }
 
   tr:nth-child(odd) {
-    background-color: #e7f6ff;
+    background-color: #e3e3e3;
   }
 
   .td-action-button {
     font-weight: bold;
-    background-color: #bed2e2;
+    background-color: #c9d3dc;
     border-color: #e7f6ff;
+    font-size: 12px;
     padding: 5px;
     border-width: 2px;
   }
@@ -87,13 +144,18 @@
 
   .nav_menu button {
     font-weight: bold;
-    background-color: #9ac1da;
+    background-color: #c1ced6;
     border-color: #e7f6ff;
+    font-size: 12px;
+    animation-name: delayedFadeIn;
+    animation-duration: 2s;
   }
 
   .form-label {
     display: inline-block;
     font-weight: bold;
+    font-size: 12px;
+    color: #cfdfe4;
     width: 140px;
     text-align: right;
     margin-bottom: 10px;
