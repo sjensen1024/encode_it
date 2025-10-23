@@ -2,6 +2,10 @@ function showMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").showModal();
 };
 
+function showAddNewEncodedItemDialog() {
+    document.getElementById("addNewEncodedItemDialog").showModal();
+};
+
 function hideMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").close();
 }
@@ -17,6 +21,10 @@ function hideAccessDeniedDialog() {
 function hideDeleteItemDialog() {
     document.getElementById("deleteItemDialog").close();
 }
+
+function hideAddNewEncodedItemDialog() {
+    document.getElementById("addNewEncodedItemDialog").close();
+};
 
 function showDeleteItemDialogWithItemId(itemId){
     yesButton = document.getElementById("deleteItemDialogYesButton");

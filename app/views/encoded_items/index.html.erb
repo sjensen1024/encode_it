@@ -12,7 +12,7 @@
       <button id="showDecodedValuesButton" onclick="showMainSecretEntryDialog()">Show Decoded Values</button>
     </li>
     <li>
-      <%= button_to "Add a New Encoded Item", new_encoded_item_path, method: :get %>
+      <button id="addNewEncodedItemButton" onclick="showAddNewEncodedItemDialog()">Add a New Encoded Item</button>
     </li>
   </ol>
 </nav>
@@ -37,6 +37,28 @@
   <p>Are you sure you want to delete this item? This cannot be undone.</p>
   <button id="deleteItemDialogYesButton", onclick="deleteItemFromButtonClick()">Yes</button>
   <button onclick="hideDeleteItemDialog()">No</button> 
+</dialog>
+
+<dialog id="addNewEncodedItemDialog">
+  <p>Enter a new item to encode here.</p>
+  <div class="dialog-form-group">
+    <label>Descriptor:</label>
+    <input type="text" autocomplete="off" id="addNewEncodedItemDescriptor"> 
+  </div>
+
+  <div class="dialog-form-group">
+    <label>Value To Encode:</label>
+    <input type="text" autocomplete="off" id="addNewEncodedItemValue"> 
+  </div>
+
+  <br>
+
+  <div>
+    <button id="saveNewItemButton"> Save Item </button>
+    <%if @does_main_item_exist %>
+        <button id="cancelButton" onclick="hideAddNewEncodedItemDialog()" >Cancel and Go Back</button>
+    <% end %>
+  </div>
 </dialog>
 
 <input type="hidden" id="formAuthenticityToken" value="<%= form_authenticity_token %>">

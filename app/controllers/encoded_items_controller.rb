@@ -4,6 +4,7 @@ class EncodedItemsController < ApplicationController
 
   # GET /encoded_items or /encoded_items.json
   def index
+    @does_main_item_exist = EncodedItem.does_item_with_main_descriptor_exist?
     @encoded_items = EncodedItem.all
   end
 
