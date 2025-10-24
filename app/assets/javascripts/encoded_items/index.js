@@ -113,3 +113,19 @@ function deleteEncodedItem(encodedItemId){
     }
     requestObject.send();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    let requestObject = new XMLHttpRequest();
+    let url = '/main_encoded_item_existence.json'
+    requestObject.open("GET", url, true);
+
+     requestObject.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            parsedResponse = JSON.parse(this.responseText);
+            if (!parsedResponse.does_main_encoded_item_exist){
+                showAddNewEncodedItemDialog();
+            }
+        }
+    }
+    requestObject.send();
+});

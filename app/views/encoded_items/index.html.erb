@@ -44,7 +44,16 @@
     <p>Enter a new item to encode here.</p>
     <div class="dialog-form-group">
       <label>Descriptor:</label>
-      <input type="text" autocomplete="off" required=true, id="addNewEncodedItemDescriptor" name="encoded_item[descriptor]"> 
+      <input 
+        type="text" 
+        autocomplete="off" 
+        required=true, 
+        <% unless @does_main_item_exist %>
+          readonly=true
+          value="MAIN ENCODED ITEM"
+        <% end %>
+        id="addNewEncodedItemDescriptor" 
+        name="encoded_item[descriptor]"> 
     </div>
 
     <div class="dialog-form-group">

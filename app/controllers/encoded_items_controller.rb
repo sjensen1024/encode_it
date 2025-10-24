@@ -1,5 +1,4 @@
 class EncodedItemsController < ApplicationController
-  before_action :enforce_main_encoded_item_existence, except: %i[ new create ]
   before_action :set_encoded_item, only: %i[ show destroy ]
 
   # GET /encoded_items or /encoded_items.json
