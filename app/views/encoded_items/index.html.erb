@@ -40,25 +40,26 @@
 </dialog>
 
 <dialog id="addNewEncodedItemDialog">
-  <p>Enter a new item to encode here.</p>
-  <div class="dialog-form-group">
-    <label>Descriptor:</label>
-    <input type="text" autocomplete="off" id="addNewEncodedItemDescriptor"> 
-  </div>
+  <form id="newEncodedItemForm" action="/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewEncodedItem()">
+    <p>Enter a new item to encode here.</p>
+    <div class="dialog-form-group">
+      <label>Descriptor:</label>
+      <input type="text" autocomplete="off" required=true, id="addNewEncodedItemDescriptor" name="encoded_item[descriptor]"> 
+    </div>
 
-  <div class="dialog-form-group">
-    <label>Value To Encode:</label>
-    <input type="text" autocomplete="off" id="addNewEncodedItemValue"> 
-  </div>
+    <div class="dialog-form-group">
+      <label>Value To Encode:</label>
+      <input type="text" autocomplete="off" required=true, id="addNewEncodedItemValue" name="encoded_item[value]"> 
+    </div>
+    <br>
 
-  <br>
-
-  <div>
-    <button id="saveNewItemButton"> Save Item </button>
-    <%if @does_main_item_exist %>
-        <button id="cancelButton" onclick="hideAddNewEncodedItemDialog()" >Cancel and Go Back</button>
-    <% end %>
-  </div>
+    <div>
+      <button id="saveNewItemButton"> Save Item </button>
+      <%if @does_main_item_exist %>
+          <button id="cancelButton" onclick="hideAddNewEncodedItemDialog()" >Cancel and Go Back</button>
+      <% end %>
+    </div>
+  </form>
 </dialog>
 
 <input type="hidden" id="formAuthenticityToken" value="<%= form_authenticity_token %>">

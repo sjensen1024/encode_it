@@ -51,6 +51,11 @@ function clearMainSecretEntry(){
     document.getElementById("mainSecretEntryText").value = "";
 }
 
+function processAddNewEncodedItem() {
+    hideAddNewEncodedItemDialog();
+    showLoadingMaskDialog();
+}
+
 
 function processMainSecretEntrySubmission() {
     showLoadingMaskDialog();
