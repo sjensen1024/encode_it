@@ -1,21 +1,14 @@
 class EncodedItemsController < ApplicationController
-  before_action :enforce_main_encoded_item_existence, except: %i[ new create ]
   before_action :set_encoded_item, only: %i[ show destroy ]
 
   # GET /encoded_items or /encoded_items.json
   def index
+    @does_main_item_exist = EncodedItem.does_item_with_main_descriptor_exist?
     @encoded_items = EncodedItem.all
   end
 
   # GET /encoded_items/1 or /encoded_items/1.json
   def show
-  end
-
-  # GET /encoded_items/new
-  def new
-    @does_main_item_exist = EncodedItem.does_item_with_main_descriptor_exist?
-    @encoded_item = EncodedItem.new
-    @encoded_item.descriptor = EncodedItem::MAIN_DESCRIPTOR unless @does_main_item_exist
   end
 
   # POST /encoded_items or /encoded_items.json
@@ -27,7 +20,8 @@ class EncodedItemsController < ApplicationController
         format.html { redirect_to encoded_items_url, notice: "Encoded item was successfully created." }
         format.json { render :show, status: :created, location: @encoded_item }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        # TODO: Remove this html formatting once we make it so that it doesn't reload the entire page on success or fail.
+        format.html { redirect_to encoded_items_url, notice: "Encoded item could not be successfully created." }
         format.json { render json: @encoded_item.errors, status: :unprocessable_entity }
       end
     end

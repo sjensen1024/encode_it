@@ -2,6 +2,26 @@ function showMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").showModal();
 };
 
+function showAddNewEncodedItemDialog() {
+    document.getElementById("addNewEncodedItemDialog").showModal();
+};
+
+function prepareForAddingNewMainEncodedItem(){
+    preText = document.getElementById("newEncodedItemPreText");
+    preText.innerHTML = "<p>Enter a main secret here.</p> <p>It will be used for decoding.</p>";
+    descriptorInput = document.getElementById("addNewEncodedItemDescriptor");
+    descriptorInput.value = "MAIN ENCODED ITEM";
+    descriptorInput.readOnly = true;
+}
+
+function prepareForAddingRegularEncodedItem(){
+    preText = document.getElementById("newEncodedItemPreText");
+    preText.innerHTML = "<p>Enter a new item to encode.</p>";
+    descriptorInput = document.getElementById("addNewEncodedItemDescriptor");
+    descriptorInput.value = "";
+    descriptorInput.readOnly = false;
+}
+
 function hideMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").close();
 }
@@ -17,6 +37,10 @@ function hideAccessDeniedDialog() {
 function hideDeleteItemDialog() {
     document.getElementById("deleteItemDialog").close();
 }
+
+function hideAddNewEncodedItemDialog() {
+    document.getElementById("addNewEncodedItemDialog").close();
+};
 
 function showDeleteItemDialogWithItemId(itemId){
     yesButton = document.getElementById("deleteItemDialogYesButton");
@@ -41,6 +65,11 @@ function getMainSecretEntry(){
 
 function clearMainSecretEntry(){
     document.getElementById("mainSecretEntryText").value = "";
+}
+
+function processAddNewEncodedItem() {
+    hideAddNewEncodedItemDialog();
+    showLoadingMaskDialog();
 }
 
 
@@ -100,3 +129,22 @@ function deleteEncodedItem(encodedItemId){
     }
     requestObject.send();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    let requestObject = new XMLHttpRequest();
+    let url = '/main_encoded_item_existence.json'
+    requestObject.open("GET", url, true);
+
+     requestObject.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            parsedResponse = JSON.parse(this.responseText);
+            if (!parsedResponse.does_main_encoded_item_exist){
+                prepareForAddingNewMainEncodedItem();
+                showAddNewEncodedItemDialog();
+                return;
+            }
+            prepareForAddingRegularEncodedItem();
+        }
+    }
+    requestObject.send();
+});

@@ -1,6 +1,4 @@
 class DecodedItemsController < ApplicationController
-    before_action :enforce_main_encoded_item_existence
-
     def index
         render json: { allowed: false, decoded_items: [] } and return unless is_entered_main_secret_valid?
 
