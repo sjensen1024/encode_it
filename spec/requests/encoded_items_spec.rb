@@ -26,13 +26,6 @@ RSpec.describe "/encoded_items", type: :request do
     end
   end
 
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_encoded_item_url
-      expect(response).to be_successful
-    end
-  end
-
   describe "POST /create" do
     context "with a successful save" do
       it "creates a new EncodedItem" do
@@ -50,9 +43,10 @@ RSpec.describe "/encoded_items", type: :request do
     context 'with an unsuccessful save' do
       before { allow_any_instance_of(EncodedItem).to receive(:save).and_return(false) }
 
+      # TODO: Change this once we make it so it doesn't reload the entire page.
       it 'should have a status of unprocessable entity' do
         post encoded_items_url, params: { encoded_item: valid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(302)
       end
     end
   end
