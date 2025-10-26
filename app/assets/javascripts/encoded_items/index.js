@@ -6,6 +6,22 @@ function showAddNewEncodedItemDialog() {
     document.getElementById("addNewEncodedItemDialog").showModal();
 };
 
+function prepareForAddingNewMainEncodedItem(){
+    preText = document.getElementById("newEncodedItemPreText");
+    preText.innerHTML = "<p>Enter a main secret here.</p> <p>It will be used for decoding.</p>";
+    descriptorInput = document.getElementById("addNewEncodedItemDescriptor");
+    descriptorInput.value = "MAIN ENCODED ITEM";
+    descriptorInput.readOnly = true;
+}
+
+function prepareForAddingRegularEncodedItem(){
+    preText = document.getElementById("newEncodedItemPreText");
+    preText.innerHTML = "<p>Enter a new item to encode.</p>";
+    descriptorInput = document.getElementById("addNewEncodedItemDescriptor");
+    descriptorInput.value = "";
+    descriptorInput.readOnly = false;
+}
+
 function hideMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").close();
 }
@@ -123,8 +139,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.readyState == 4 && this.status == 200) {
             parsedResponse = JSON.parse(this.responseText);
             if (!parsedResponse.does_main_encoded_item_exist){
+                prepareForAddingNewMainEncodedItem();
                 showAddNewEncodedItemDialog();
+                return;
             }
+            prepareForAddingRegularEncodedItem();
         }
     }
     requestObject.send();

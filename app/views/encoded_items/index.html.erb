@@ -41,17 +41,13 @@
 
 <dialog id="addNewEncodedItemDialog">
   <form id="newEncodedItemForm" action="/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewEncodedItem()">
-    <p>Enter a new item to encode here.</p>
+    <div id="newEncodedItemPreText"></div>
     <div class="dialog-form-group">
       <label>Descriptor:</label>
       <input 
         type="text" 
         autocomplete="off" 
         required=true, 
-        <% unless @does_main_item_exist %>
-          readonly=true
-          value="MAIN ENCODED ITEM"
-        <% end %>
         id="addNewEncodedItemDescriptor" 
         name="encoded_item[descriptor]"> 
     </div>
