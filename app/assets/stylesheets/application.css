@@ -85,7 +85,7 @@
     animation-duration: 3s;
     table-layout: fixed;
     height: 600px;
-    width: 1300px;
+    width: 1100px;
     overflow: auto;
     display: block;
     box-shadow: 0 12px 18px rgba(2, 0, 12, 1);
@@ -95,8 +95,8 @@
     border: 3px solid #c1ced6;
     text-align: center;
     padding: 10px;
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 250px;
+    max-width: 250px;
     word-wrap: break-word;
     overflow-wrap: break-word;
     font-size: 15px;
@@ -107,8 +107,8 @@
     border: 3px solid #e4e4e4;
     text-align: center;
     padding: 8px;
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 250px;
+    max-width: 250px;
     word-wrap: break-word;
     overflow-wrap: break-word;
     font-size: 12px;
