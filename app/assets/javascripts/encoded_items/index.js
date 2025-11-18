@@ -130,6 +130,28 @@ function deleteEncodedItem(encodedItemId){
     requestObject.send();
 }
 
+function exportEncodedItemsBackupFile(){
+    showLoadingMaskDialog();
+    authenticityToken = document.getElementById('formAuthenticityToken').value;
+    let requestObject = new XMLHttpRequest();
+    let url = '/file_backup/export?authenticity_token=' + authenticityToken;
+    requestObject.open("POST", url, true);
+    requestObject.send();
+
+    // TODO: Handle this better/more consistently with other functions.
+    requestObject.onreadystatechange = function () {
+        hideLoadingMaskDialog();
+        if (this.readyState != 4) {
+            alert("A new backup file has been created.");
+            return;
+        }
+        if (this.status != 200){
+            alert("There was an error in exporting the backup file.");
+            return;
+        }
+    }   
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     let requestObject = new XMLHttpRequest();
     let url = '/main_encoded_item_existence.json'
