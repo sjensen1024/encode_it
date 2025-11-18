@@ -9,7 +9,7 @@ module FileBackup
 
         def import
             results = JSON.parse(@import_file)
-            imported_items = results.map { |result| EncodedItem.new(result) }
+            @imported_items = results.map { |result| EncodedItem.new(result) }
         end
     end
 end
