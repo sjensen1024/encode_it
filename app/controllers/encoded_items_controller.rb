@@ -17,8 +17,13 @@ class EncodedItemsController < ApplicationController
 
     respond_to do |format|
       if @encoded_item.save
-        format.html { redirect_to encoded_items_url, notice: "Encoded item was successfully created." }
-        format.json { render :show, status: :created, location: @encoded_item }
+        #format.html { redirect_to encoded_items_url, notice: "Encoded item was successfully created." }
+        #format.json { render :show, status: :created, location: @encoded_item }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append(:encoded_item, partial: "encoded_items/encoded_item_row", locals: { encoded_item: @encoded_item }),
+          ]
+        end
       else
         # TODO: Remove this html formatting once we make it so that it doesn't reload the entire page on success or fail.
         format.html { redirect_to encoded_items_url, notice: "Encoded item could not be successfully created." }

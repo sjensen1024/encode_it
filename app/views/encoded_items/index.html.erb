@@ -72,7 +72,7 @@
 
 <input type="hidden" id="formAuthenticityToken" value="<%= form_authenticity_token %>">
 
-<div id="encoded_item">
+<div id="encoded_item" class="scrollable-table">
   <table>
     <tr>
       <th>Descriptor</th>
@@ -81,18 +81,7 @@
       <th>Actions</th>
     </tr>
     <% @encoded_items.each do |encoded_item| %>
-      <tr>
-        <td> <%= encoded_item.descriptor %> </td>
-        <td> <%= encoded_item.value %> </td>
-        <td> 
-          <span id="decoded_item_<%= encoded_item.id %>" class="hidden_encoded_value"> 
-            ?
-          </span> 
-        </td>
-        <td>
-          <button class='td-action-button' onclick='showDeleteItemDialogWithItemId(<%= encoded_item.id %>)'>Delete</button>
-        </td>
-      </tr>
+      <%= render partial: 'encoded_items/encoded_item_row', locals: { encoded_item: encoded_item } %>
     <% end %>
   </table>
 </div>
