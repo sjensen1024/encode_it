@@ -1,0 +1,28 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "2f900aed265a8772e59e3cb9ff0a14ac4dbc363f20ad7abfa2c561ae2eb2c607",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/file_backup/exports_controller.rb",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(FileBackup::Exporter.new(EncodedItem.all).file_path, :type => \"application/json\", :filename => File.basename(FileBackup::Exporter.new(EncodedItem.all).file_path))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FileBackup::ExportsController",
+        "method": "create"
+      },
+      "user_input": "EncodedItem.all",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "the file_path in the service object is not able to be manipulated by the user and this is a locally running application"
+    }
+  ],
+  "brakeman_version": "7.1.1"
+}

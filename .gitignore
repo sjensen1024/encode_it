@@ -35,3 +35,7 @@
 
 # Ignore the directory where simplecov results go.
 /coverage
+
+# Ignore all the encoded item export files.
+/exports/*
+!/exports/.keep
