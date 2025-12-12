@@ -1,0 +1,28 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "7ec2d9c9537d77097ebafeb00c4a97532754eb8d99be9ad24a6d92cc2f76f229",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/file_backup/exports_controller.rb",
+      "line": 8,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(FileBackup::Exporter.new(EncodedItem.all).file_path, :type => \"application/json\", :filename => File.basename(snaitize(FileBackup::Exporter.new(EncodedItem.all).file_path)))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FileBackup::ExportsController",
+        "method": "create"
+      },
+      "user_input": "EncodedItem.all",
+      "confidence": "Weak",
+      "cwe_id": [
+        22
+      ],
+      "note": "the attribute being flagged is set within a service object and is not modifiable by the user"
+    }
+  ],
+  "brakeman_version": "7.1.1"
+}
