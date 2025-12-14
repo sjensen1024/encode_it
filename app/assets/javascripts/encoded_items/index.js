@@ -148,7 +148,6 @@ function exportEncodedItemsBackupFile(){
 
     requestObject.onreadystatechange = function () {
         hideLoadingMaskDialog();
-        console.log(this.responseText);
         if (this.readyState != 4 && this.responseText !== '') {
             showExportEncodedItemsDialog();
             return;
