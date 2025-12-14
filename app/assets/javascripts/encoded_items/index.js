@@ -38,6 +38,14 @@ function hideDeleteItemDialog() {
     document.getElementById("deleteItemDialog").close();
 }
 
+function showExportEncodedItemsDialog() {
+    document.getElementById("exportEncodedItemsDialog").showModal();
+}
+
+function hideExportEncodedItemsDialog() {
+    document.getElementById("exportEncodedItemsDialog").close();
+}
+
 function hideAddNewEncodedItemDialog() {
     document.getElementById("addNewEncodedItemDialog").close();
 };
@@ -138,11 +146,11 @@ function exportEncodedItemsBackupFile(){
     requestObject.open("POST", url, true);
     requestObject.send();
 
-    // TODO: Handle this better/more consistently with other functions.
     requestObject.onreadystatechange = function () {
         hideLoadingMaskDialog();
-        if (this.readyState != 4) {
-            alert("A new backup file has been created.");
+        console.log(this.responseText);
+        if (this.readyState != 4 && this.responseText !== '') {
+            showExportEncodedItemsDialog();
             return;
         }
         if (this.status != 200){
