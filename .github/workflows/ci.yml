@@ -84,7 +84,7 @@ jobs:
           ruby bin/bundle exec rspec
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: screenshots
@@ -92,7 +92,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage
           path: ${{ github.workspace }}/coverage
