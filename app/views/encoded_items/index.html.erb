@@ -42,6 +42,11 @@
   <button onclick="hideDeleteItemDialog()">No</button> 
 </dialog>
 
+<dialog id="exportEncodedItemsDialog">
+  <p>A new backup file has been created in the exports directory.</p>
+  <button onclick="hideExportEncodedItemsDialog()">OK</button>
+</dialog>
+
 <dialog id="addNewEncodedItemDialog">
   <form id="newEncodedItemForm" action="/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewEncodedItem()">
     <div id="newEncodedItemPreText"></div>

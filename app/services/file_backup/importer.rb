@@ -11,5 +11,7 @@ module FileBackup
             results = JSON.parse(@import_file)
             @imported_items = results.map { |result| EncodedItem.new(result) }
         end
+
+      # TODO: Add capability for saving imported items to DB.
     end
 end
