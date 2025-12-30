@@ -134,7 +134,6 @@ function deleteEncodedItem(encodedItemId){
             return;
         }
 
-        // Apply the returned turbo-stream so it will remove the row (no full reload needed)
         Turbo.renderStreamMessage(this.responseText);
         hideLoadingMaskDialog();
     }
