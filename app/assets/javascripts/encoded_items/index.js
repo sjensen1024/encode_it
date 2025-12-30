@@ -77,13 +77,10 @@ function clearMainSecretEntry(){
 
 function processAddNewEncodedItem() {
     hideAddNewEncodedItemDialog();
-    showLoadingMaskDialog();
 }
 
 
 function processMainSecretEntrySubmission() {
-    showLoadingMaskDialog();
-
     let requestObject = new XMLHttpRequest();
     let url = '/decoded_items?main_secret_entry=' + getMainSecretEntry();
     requestObject.open("GET", url, true);
@@ -94,7 +91,6 @@ function processMainSecretEntrySubmission() {
             parsedResponse = JSON.parse(this.responseText);
 
             if (!parsedResponse.allowed) {
-                hideLoadingMaskDialog();
                 showAccessDeniedDialog();
                 return;
             }
@@ -104,10 +100,8 @@ function processMainSecretEntrySubmission() {
                 element = document.getElementById('decoded_item_' + decodedItem.id);
                 element.innerHTML = decodedItem.value;
                 element.className = "revealed_encoded_value";
-                if (i == parsedResponse.decoded_items.length - 1){
-                    hideLoadingMaskDialog();
+                if (i == parsedResponse.decoded_items.length - 1)
                     document.getElementById("showDecodedValuesButton").disabled = true;
-                }
             }
         }
     }
@@ -116,30 +110,28 @@ function processMainSecretEntrySubmission() {
 }
 
 function deleteEncodedItem(encodedItemId){
-    showLoadingMaskDialog();
     authenticityToken = document.getElementById('formAuthenticityToken').value;
 
     let requestObject = new XMLHttpRequest();
     let url = '/encoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken;
     requestObject.open("DELETE", url, true);
+    requestObject.setRequestHeader('Accept', 'text/vnd.turbo-stream.html');
 
     requestObject.onreadystatechange = function () {
         if (this.readyState != 4) {
             return;
         }
         if (this.status != 200){
-            hideLoadingMaskDialog();
             alert("There was an error in deleting this item.");
             return;
         }
 
-        location.reload();
+        Turbo.renderStreamMessage(this.responseText);
     }
     requestObject.send();
 }
 
 function exportEncodedItemsBackupFile(){
-    showLoadingMaskDialog();
     authenticityToken = document.getElementById('formAuthenticityToken').value;
     let requestObject = new XMLHttpRequest();
     let url = '/file_backup/export?authenticity_token=' + authenticityToken;
@@ -147,7 +139,6 @@ function exportEncodedItemsBackupFile(){
     requestObject.send();
 
     requestObject.onreadystatechange = function () {
-        hideLoadingMaskDialog();
         if (this.readyState != 4 && this.responseText !== '') {
             showExportEncodedItemsDialog();
             return;

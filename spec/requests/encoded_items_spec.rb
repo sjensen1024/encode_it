@@ -35,8 +35,8 @@ RSpec.describe "/encoded_items", type: :request do
       end
 
       it "redirects to the created encoded_item" do
-        post encoded_items_url, params: { encoded_item: valid_attributes }
-        expect(response).to redirect_to(encoded_items_url)
+        post encoded_items_url, params: { encoded_item: valid_attributes }, as: :turbo_stream
+        expect(response.body).to include("Some descriptor")
       end
     end
 
@@ -45,7 +45,7 @@ RSpec.describe "/encoded_items", type: :request do
 
       # TODO: Change this once we make it so it doesn't reload the entire page.
       it 'should have a status of unprocessable entity' do
-        post encoded_items_url, params: { encoded_item: valid_attributes }
+        post encoded_items_url, params: { encoded_item: valid_attributes }, as: :turbo_stream
         expect(response).to have_http_status(302)
       end
     end
@@ -61,8 +61,8 @@ RSpec.describe "/encoded_items", type: :request do
 
     it "redirects to the encoded_items list" do
       encoded_item = EncodedItem.create! valid_attributes
-      delete encoded_item_url(encoded_item)
-      expect(response).to redirect_to(encoded_items_url)
+      delete encoded_item_url(encoded_item), as: :turbo_stream
+      expect(response.body).not_to include("Some descriptor")
     end
   end
 end

@@ -31,6 +31,10 @@ class EncodedItem < ApplicationRecord
         Base64.decode64(self.placement)
     end
 
+    def is_item_with_main_descriptor?
+        self.descriptor == MAIN_DESCRIPTOR
+    end
+
     private
 
     def apply_encoding_for_create

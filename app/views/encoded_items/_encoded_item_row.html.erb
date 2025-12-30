@@ -1,0 +1,14 @@
+<tr id="<%= dom_id(encoded_item) %>">
+  <td><%= encoded_item.descriptor %></td>
+  <td><%= encoded_item.value %></td>
+  <td>
+    <span id="decoded_item_<%= encoded_item.id %>" class="hidden_encoded_value">
+      ?
+    </span>
+  </td>
+  <td>
+    <% unless encoded_item.is_item_with_main_descriptor? %>
+      <button class="td-action-button" onclick="showDeleteItemDialogWithItemId(<%= encoded_item.id %>)">Delete</button>
+    <% end %>
+  </td>
+</tr>
