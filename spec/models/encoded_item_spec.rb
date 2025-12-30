@@ -23,6 +23,18 @@ RSpec.describe EncodedItem, type: :model do
     end
   end
 
+  describe '#is_item_with_main_descriptor?' do
+    it 'should return true if the descriptor matches the main descriptor' do
+      encoded_item = FactoryBot.build(:encoded_item, descriptor: EncodedItem::MAIN_DESCRIPTOR)
+      expect(encoded_item.is_item_with_main_descriptor?).to be(true)
+    end
+
+    it 'should return false if the descriptor does not match the main descriptor' do
+      encoded_item = FactoryBot.build(:encoded_item, descriptor: 'Some other descriptor')
+      expect(encoded_item.is_item_with_main_descriptor?).to be(false)
+    end
+  end
+
   context 'creating and decoding' do
     let(:encoded_item) do
       FactoryBot.create(:encoded_item, descriptor: 'Phrase', value: 'Hello world!')
