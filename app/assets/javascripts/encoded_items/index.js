@@ -122,6 +122,7 @@ function deleteEncodedItem(encodedItemId){
     let requestObject = new XMLHttpRequest();
     let url = '/encoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken;
     requestObject.open("DELETE", url, true);
+    requestObject.setRequestHeader('Accept', 'text/vnd.turbo-stream.html');
 
     requestObject.onreadystatechange = function () {
         if (this.readyState != 4) {
@@ -133,7 +134,9 @@ function deleteEncodedItem(encodedItemId){
             return;
         }
 
-        location.reload();
+        // Apply the returned turbo-stream so it will remove the row (no full reload needed)
+        Turbo.renderStreamMessage(this.responseText);
+        hideLoadingMaskDialog();
     }
     requestObject.send();
 }

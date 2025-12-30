@@ -79,14 +79,18 @@
 
 <div id="encoded_item" class="scrollable-table">
   <table>
-    <tr>
-      <th>Descriptor</th>
-      <th>Encoded Value</th>
-      <th>Decoded Value</th>
-      <th>Actions</th>
-    </tr>
-    <% @encoded_items.each do |encoded_item| %>
-      <%= render partial: 'encoded_items/encoded_item_row', locals: { encoded_item: encoded_item } %>
-    <% end %>
+    <thead id="encodedItemsTableHeader">
+      <tr>
+        <th>Descriptor</th>
+        <th>Encoded Value</th>
+        <th>Decoded Value</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="encodedItemsTableBody">
+      <% @encoded_items.each do |encoded_item| %>
+        <%= render partial: 'encoded_items/encoded_item_row', locals: { encoded_item: encoded_item } %>
+      <% end %>
+    </tbody>
   </table>
 </div>

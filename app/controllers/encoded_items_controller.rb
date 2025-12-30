@@ -4,7 +4,7 @@ class EncodedItemsController < ApplicationController
   # GET /encoded_items or /encoded_items.json
   def index
     @does_main_item_exist = EncodedItem.does_item_with_main_descriptor_exist?
-    @encoded_items = EncodedItem.all
+    @encoded_items = EncodedItem.order(created_at: :desc)
   end
 
   # GET /encoded_items/1 or /encoded_items/1.json
@@ -17,11 +17,13 @@ class EncodedItemsController < ApplicationController
 
     respond_to do |format|
       if @encoded_item.save
-        #format.html { redirect_to encoded_items_url, notice: "Encoded item was successfully created." }
-        #format.json { render :show, status: :created, location: @encoded_item }
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append(:encoded_item, partial: "encoded_items/encoded_item_row", locals: { encoded_item: @encoded_item }),
+            turbo_stream.prepend(
+              "encodedItemsTableBody",
+              partial: "encoded_items/encoded_item_row",
+              locals: { encoded_item: @encoded_item }
+            )
           ]
         end
       else
@@ -37,7 +39,9 @@ class EncodedItemsController < ApplicationController
     @encoded_item.destroy!
 
     respond_to do |format|
-      format.html { redirect_to encoded_items_path, status: :see_other, notice: "Encoded item was successfully destroyed." }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove(helpers.dom_id(@encoded_item))
+      end
       format.json { head :no_content }
     end
   end
