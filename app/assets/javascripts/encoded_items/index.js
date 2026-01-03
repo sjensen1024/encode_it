@@ -20,7 +20,7 @@ function prepareForAddingRegularEncodedItem(){
     descriptorInput = document.getElementById("addNewEncodedItemDescriptor");
     descriptorInput.value = "";
     descriptorInput.readOnly = false;
-}
+}   
 
 function hideMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").close();
@@ -103,6 +103,8 @@ function processMainSecretEntrySubmission() {
                 if (i == parsedResponse.decoded_items.length - 1)
                     document.getElementById("showDecodedValuesButton").disabled = true;
             }
+
+            toggleTableBlur();
         }
     }
     requestObject.send();
@@ -150,6 +152,16 @@ function exportEncodedItemsBackupFile(){
     }   
 }
 
+/* Toggle table blur (toggles .blurred on #encoded_item and updates the button ARIA/text) */
+function toggleTableBlur() {
+    const container = document.getElementById('encoded_item');
+    const btn = document.getElementById('toggleBlurButton');
+    if (!container || !btn) return;
+    const isBlurred = container.classList.toggle('blurred');
+    btn.setAttribute('aria-pressed', isBlurred ? 'true' : 'false');
+    btn.textContent = isBlurred ? 'Unblur Table' : 'Blur Table';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     let requestObject = new XMLHttpRequest();
     let url = '/main_encoded_item_existence.json'
@@ -164,6 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             prepareForAddingRegularEncodedItem();
+            toggleTableBlur();
+            showMainSecretEntryDialog();
         }
     }
     requestObject.send();

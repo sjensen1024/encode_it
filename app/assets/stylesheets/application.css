@@ -185,3 +185,18 @@ tr:nth-child(odd) {
 .dialog-form-group input {
   flex-grow: 1;
 }
+
+/* Toggleable blur for encoded items table */
+#encoded_item {
+  transition: filter 0.2s ease;
+}
+
+#encoded_item.blurred {
+  filter: blur(6px);
+}
+
+/* Disable interactions on action buttons and inline buttons when blurred but allow scrolling */
+#encoded_item.blurred .td-action-button,
+#encoded_item.blurred button {
+  pointer-events: none;
+} 
