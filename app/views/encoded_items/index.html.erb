@@ -9,16 +9,10 @@
 <nav class='nav_menu'>
   <ol>
     <li>
-      <button id="showDecodedValuesButton" onclick="showMainSecretEntryDialog()">Show Decoded Values</button>
-    </li>
-    <li>
       <button id="addNewEncodedItemButton" onclick="showAddNewEncodedItemDialog()">Add a New Encoded Item</button>
     </li>
     <li>
       <button id="exportEncodedItemsButton" onclick="exportEncodedItemsBackupFile()">Export Encoded Items</button>
-    </li>
-    <li>
-      <button id="toggleBlurButton" onclick="toggleTableBlur()" aria-pressed="false">Blur Table</button>
     </li>
   </ol>
 </nav> 
@@ -28,13 +22,11 @@
   <p>Enter the main secret:</p>
   <input autofocus type="text" autocomplete="off" id="mainSecretEntryText"><br><br>
   <button onclick='processMainSecretEntrySubmission()'>Submit</button>
-  <button onclick='hideMainSecretEntryDialog()'>Cancel</button>
 </dialog>
 
 <dialog id="accessDeniedDialog">
   <p>You did not enter the correct secret. Decoding failed.</p>
   <button onclick='reopenSecretEntryFromAccessDenied()'>Try Again</button>
-  <button onclick='hideAccessDeniedDialog()'>Cancel</button>
 </dialog>
 
 <dialog id="deleteItemDialog">

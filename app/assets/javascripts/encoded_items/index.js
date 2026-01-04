@@ -100,9 +100,12 @@ function processMainSecretEntrySubmission() {
                 element = document.getElementById('decoded_item_' + decodedItem.id);
                 element.innerHTML = decodedItem.value;
                 element.className = "revealed_encoded_value";
-                if (i == parsedResponse.decoded_items.length - 1)
-                    document.getElementById("showDecodedValuesButton").disabled = true;
             }
+
+            addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
+            addNewEncodedItemButton.disabled = false;
+            exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
+            exportEncodedItemsButton.disabled = false;
 
             toggleTableBlur();
         }
@@ -152,14 +155,10 @@ function exportEncodedItemsBackupFile(){
     }   
 }
 
-/* Toggle table blur (toggles .blurred on #encoded_item and updates the button ARIA/text) */
 function toggleTableBlur() {
     const container = document.getElementById('encoded_item');
-    const btn = document.getElementById('toggleBlurButton');
-    if (!container || !btn) return;
+    if (!container) return;
     const isBlurred = container.classList.toggle('blurred');
-    btn.setAttribute('aria-pressed', isBlurred ? 'true' : 'false');
-    btn.textContent = isBlurred ? 'Unblur Table' : 'Blur Table';
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -176,6 +175,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             prepareForAddingRegularEncodedItem();
+            addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
+            addNewEncodedItemButton.disabled = true;
+            exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
+            exportEncodedItemsButton.disabled = true;
             toggleTableBlur();
             showMainSecretEntryDialog();
         }
