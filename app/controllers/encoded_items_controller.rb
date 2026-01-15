@@ -1,4 +1,5 @@
 class EncodedItemsController < ApplicationController
+  include MainSecretEntry
   before_action :set_encoded_item, only: %i[ show destroy ]
 
   # GET /encoded_items or /encoded_items.json
@@ -36,6 +37,10 @@ class EncodedItemsController < ApplicationController
 
   # DELETE /encoded_items/1 or /encoded_items/1.json
   def destroy
+    unless is_entered_main_secret_valid?
+      render json: { allowed: false } and return
+    end
+
     @encoded_item.destroy!
 
     respond_to do |format|

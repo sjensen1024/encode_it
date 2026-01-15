@@ -140,7 +140,7 @@ function deleteEncodedItem(encodedItemId){
     authenticityToken = document.getElementById('formAuthenticityToken').value;
 
     let requestObject = new XMLHttpRequest();
-    let url = '/encoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken;
+    let url = '/encoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken + '&main_secret_entry=' + getMainSecretEntry();
     requestObject.open("DELETE", url, true);
     requestObject.setRequestHeader('Accept', 'text/vnd.turbo-stream.html');
 

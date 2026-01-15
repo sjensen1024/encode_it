@@ -52,17 +52,34 @@ RSpec.describe "/encoded_items", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested encoded_item" do
-      encoded_item = EncodedItem.create! valid_attributes
-      expect {
-        delete encoded_item_url(encoded_item)
-      }.to change(EncodedItem, :count).by(-1)
+    context 'with invalid main secret entry' do
+      it "does not destroy the requested encoded_item" do
+        encoded_item = EncodedItem.create! valid_attributes
+        expect {
+          delete encoded_item_url(encoded_item)
+        }.to change(EncodedItem, :count).by(0)
+      end
     end
 
-    it "redirects to the encoded_items list" do
-      encoded_item = EncodedItem.create! valid_attributes
-      delete encoded_item_url(encoded_item), as: :turbo_stream
-      expect(response.body).not_to include("Some descriptor")
+    context 'with valid main secret entry' do
+      let(:main_encoded_item) { FactoryBot.build(:encoded_item, descriptor: EncodedItem::MAIN_DESCRIPTOR) }
+      before do
+        allow(main_encoded_item).to receive(:decode_value).and_return('correct_main_secret')
+        allow(EncodedItem).to receive(:with_main_descriptor).and_return(main_encoded_item)
+      end
+
+      it "destroys the requested encoded_item" do
+        encoded_item = EncodedItem.create! valid_attributes
+          expect {
+            delete encoded_item_url(encoded_item), params: { main_secret_entry: 'correct_main_secret' }, as: :turbo_stream
+          }.to change(EncodedItem, :count).by(-1)
+      end
+
+      it "redirects to the encoded_items list" do
+        encoded_item = EncodedItem.create! valid_attributes
+        delete encoded_item_url(encoded_item), params: { main_secret_entry: 'correct_main_secret' }, as: :turbo_stream
+        expect(response.body).not_to include("Some descriptor")
+      end
     end
   end
 end
