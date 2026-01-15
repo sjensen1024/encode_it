@@ -71,14 +71,9 @@ function getMainSecretEntry(){
     return document.getElementById("mainSecretEntryText").value;
 }
 
-function clearMainSecretEntry(){
-    document.getElementById("mainSecretEntryText").value = "";
-}
-
 function processAddNewEncodedItem() {
     hideAddNewEncodedItemDialog();
 }
-
 
 function processMainSecretEntrySubmission() {
     let requestObject = new XMLHttpRequest();
@@ -87,19 +82,10 @@ function processMainSecretEntrySubmission() {
 
     requestObject.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            clearMainSecretEntry();
             parsedResponse = JSON.parse(this.responseText);
-
             if (!parsedResponse.allowed) {
                 showAccessDeniedDialog();
                 return;
-            }
-
-            for (let i = 0; i < parsedResponse.decoded_items.length; i++) {
-                decodedItem = parsedResponse.decoded_items[i];
-                element = document.getElementById('decoded_item_' + decodedItem.id);
-                element.innerHTML = decodedItem.value;
-                element.className = "revealed_encoded_value";
             }
 
             addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
@@ -113,6 +99,42 @@ function processMainSecretEntrySubmission() {
     requestObject.send();
     hideMainSecretEntryDialog();
 }
+
+function toggleEncodedItemValueDisplay(encodedItemId){
+    element =  document.getElementById('decoded_item_' + encodedItemId);
+    if (element.className === "hidden_encoded_value"){
+        showDecodedItemValue(encodedItemId);
+    } else {
+        element.innerHTML = "?";
+        element.className = "hidden_encoded_value";
+    }
+}
+
+function showDecodedItemValue(encodedItemId){
+    let requestObject = new XMLHttpRequest();
+
+    authenticityToken = document.getElementById('formAuthenticityToken').value;
+    let url = '/decoded_items/' + encodedItemId + '?authenticity_token=' + authenticityToken + '&main_secret_entry=' + getMainSecretEntry();
+    requestObject.open("GET", url, true);
+
+    requestObject.onreadystatechange = function () {
+        if (this.readyState != 4 || this.status != 200) {
+            return;
+        }
+
+        parsedResponse = JSON.parse(this.responseText);
+        element =  document.getElementById('decoded_item_' + encodedItemId);
+        if (!parsedResponse.allowed){
+            alert("Access Denied: Incorrect main secret entry.");
+            return;
+        }
+        
+        element.innerHTML = parsedResponse.decoded_item.value;
+        element.className = "revealed_encoded_value";
+    }
+    requestObject.send();
+}
+
 
 function deleteEncodedItem(encodedItemId){
     authenticityToken = document.getElementById('formAuthenticityToken').value;
