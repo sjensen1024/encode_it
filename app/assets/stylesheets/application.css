@@ -128,7 +128,7 @@ td {
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-size: 12px;
-  animation-name: delayedFadeIn;
+  animation-name: standardFadeIn;
   animation-duration: 4s;
 }
 
