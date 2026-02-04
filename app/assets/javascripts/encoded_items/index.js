@@ -85,11 +85,7 @@ function processAddNewEncodedItem() {
 
 function processAddNewMainEncodedItem() {
     hideAddNewMainEncodedItemDialog();
-    addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
-    addNewEncodedItemButton.disabled = true;
-    exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
-    exportEncodedItemsButton.disabled = true;
-    toggleTableBlur();
+    showMainSecretEntryDialog();
 }
 
 function processMainSecretEntrySubmission() {
@@ -208,16 +204,17 @@ document.addEventListener('DOMContentLoaded', function() {
      requestObject.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             parsedResponse = JSON.parse(this.responseText);
-            if (!parsedResponse.does_main_encoded_item_exist){
-                showAddNewMainEncodedItemDialog();
-                return;
-            }
             addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
             addNewEncodedItemButton.disabled = true;
             exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
             exportEncodedItemsButton.disabled = true;
             toggleTableBlur();
             showMainSecretEntryDialog();
+            if (parsedResponse.does_main_encoded_item_exist){
+                showMainSecretEntryDialog();
+                return;
+            }
+            showAddNewMainEncodedItemDialog();
         }
     }
     requestObject.send();
