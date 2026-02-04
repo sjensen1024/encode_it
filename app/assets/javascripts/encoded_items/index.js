@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
             addNewEncodedItemButton.disabled = true;
             exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
             exportEncodedItemsButton.disabled = true;
-            //toggleTableBlur();
+            toggleTableBlur();
             showMainSecretEntryDialog();
         }
     }
