@@ -2,6 +2,10 @@ function showMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").showModal();
 };
 
+function showAddNewMainEncodedItemDialog(){
+    document.getElementById("addNewMainEncodedItemDialog").showModal();
+}
+
 function showAddNewEncodedItemDialog() {
     document.getElementById("addNewEncodedItemDialog").showModal();
 };
@@ -46,6 +50,10 @@ function hideExportEncodedItemsDialog() {
     document.getElementById("exportEncodedItemsDialog").close();
 }
 
+function hideAddNewMainEncodedItemDialog(){
+    document.getElementById("addNewMainEncodedItemDialog").close();
+}
+
 function hideAddNewEncodedItemDialog() {
     document.getElementById("addNewEncodedItemDialog").close();
 };
@@ -73,6 +81,15 @@ function getMainSecretEntry(){
 
 function processAddNewEncodedItem() {
     hideAddNewEncodedItemDialog();
+}
+
+function processAddNewMainEncodedItem() {
+    hideAddNewMainEncodedItemDialog();
+    addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
+    addNewEncodedItemButton.disabled = true;
+    exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
+    exportEncodedItemsButton.disabled = true;
+    toggleTableBlur();
 }
 
 function processMainSecretEntrySubmission() {
@@ -192,16 +209,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (this.readyState == 4 && this.status == 200) {
             parsedResponse = JSON.parse(this.responseText);
             if (!parsedResponse.does_main_encoded_item_exist){
-                prepareForAddingNewMainEncodedItem();
-                showAddNewEncodedItemDialog();
+                showAddNewMainEncodedItemDialog();
                 return;
             }
-            prepareForAddingRegularEncodedItem();
             addNewEncodedItemButton = document.getElementById("addNewEncodedItemButton");
             addNewEncodedItemButton.disabled = true;
             exportEncodedItemsButton = document.getElementById("exportEncodedItemsButton");
             exportEncodedItemsButton.disabled = true;
-            toggleTableBlur();
+            //toggleTableBlur();
             showMainSecretEntryDialog();
         }
     }

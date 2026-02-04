@@ -40,9 +40,35 @@
   <button onclick="hideExportEncodedItemsDialog()">OK</button>
 </dialog>
 
+<dialog id="addNewMainEncodedItemDialog">
+  <form id="newMainEncodedItemForm" action="/encoded_items/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewMainEncodedItem()">
+    <p>Enter a main secret here.</p>
+    <p>It will be used for decoding.</p>
+    <div class="dialog-form-group">
+      <label>Descriptor:</label>
+      <input 
+        type="text" 
+        required=true, 
+        readOnly=true,
+        value="MAIN ENCODED ITEM",
+        id="addNewMainEncodedItemDescriptor" 
+        name="encoded_item[descriptor]">
+    </div>
+
+    <div class="dialog-form-group">
+      <label>Value To Encode:</label>
+      <input type="text" autocomplete="off" required=true, id="addNewMainEncodedItemValue" name="encoded_item[value]"> 
+    </div>
+    <br>
+
+    <div>
+      <button id="saveNewMainItemButton"> Save Item </button>
+    </div>
+</dilaog>
+
 <dialog id="addNewEncodedItemDialog">
   <form id="newEncodedItemForm" action="/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewEncodedItem()">
-    <div id="newEncodedItemPreText"></div>
+    <p>Enter details for the new encoded item.</p>
     <div class="dialog-form-group">
       <label>Descriptor:</label>
       <input 
