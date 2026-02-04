@@ -9,29 +9,24 @@
 <nav class='nav_menu'>
   <ol>
     <li>
-      <button id="showDecodedValuesButton" onclick="showMainSecretEntryDialog()">Show Decoded Values</button>
-    </li>
-    <li>
       <button id="addNewEncodedItemButton" onclick="showAddNewEncodedItemDialog()">Add a New Encoded Item</button>
     </li>
     <li>
       <button id="exportEncodedItemsButton" onclick="exportEncodedItemsBackupFile()">Export Encoded Items</button>
     </li>
   </ol>
-</nav>
+</nav> 
 
 
 <dialog id="mainSecretEntryDialog">
   <p>Enter the main secret:</p>
   <input autofocus type="text" autocomplete="off" id="mainSecretEntryText"><br><br>
   <button onclick='processMainSecretEntrySubmission()'>Submit</button>
-  <button onclick='hideMainSecretEntryDialog()'>Cancel</button>
 </dialog>
 
 <dialog id="accessDeniedDialog">
   <p>You did not enter the correct secret. Decoding failed.</p>
   <button onclick='reopenSecretEntryFromAccessDenied()'>Try Again</button>
-  <button onclick='hideAccessDeniedDialog()'>Cancel</button>
 </dialog>
 
 <dialog id="deleteItemDialog">
@@ -45,9 +40,35 @@
   <button onclick="hideExportEncodedItemsDialog()">OK</button>
 </dialog>
 
+<dialog id="addNewMainEncodedItemDialog">
+  <form id="newMainEncodedItemForm" action="/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewMainEncodedItem()">
+    <p>Enter a main secret here.</p>
+    <p>You'll need to enter it going forward.</p>
+    <div class="dialog-form-group">
+      <label>Descriptor:</label>
+      <input 
+        type="text" 
+        readOnly=true,
+        value="MAIN ENCODED ITEM",
+        id="addNewMainEncodedItemDescriptor" 
+        name="encoded_item[descriptor]">
+    </div>
+
+    <div class="dialog-form-group">
+      <label>Value To Encode:</label>
+      <input type="text" autocomplete="off" required=true, id="addNewMainEncodedItemValue" name="encoded_item[value]"> 
+    </div>
+    <br>
+
+    <div>
+      <button id="saveNewMainItemButton" type="submit"> Save Item </button>
+    </div>
+  </form>
+</dialog>
+
 <dialog id="addNewEncodedItemDialog">
   <form id="newEncodedItemForm" action="/encoded_items" accept-charset="UTF-8" method="post" onsubmit="processAddNewEncodedItem()">
-    <div id="newEncodedItemPreText"></div>
+    <p>Enter details for the new encoded item.</p>
     <div class="dialog-form-group">
       <label>Descriptor:</label>
       <input 
