@@ -2,6 +2,26 @@ function showMainSecretEntryDialog() {
     document.getElementById("mainSecretEntryDialog").showModal();
 };
 
+function togglePasswordVisibility() {
+    const input = document.getElementById("mainSecretEntryText");
+    const btn = document.querySelector(".toggle-password-btn");
+    
+    if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "Hide";
+    } else {
+        input.type = "password";
+        btn.textContent = "Show";
+    }
+}
+
+function handleMainSecretKeypress(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        processMainSecretEntrySubmission();
+    }
+}
+
 function showAddNewMainEncodedItemDialog(){
     document.getElementById("addNewMainEncodedItemDialog").showModal();
 }

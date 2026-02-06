@@ -23,7 +23,10 @@
 
 <dialog id="mainSecretEntryDialog">
   <p>Enter the main secret:</p>
-  <input autofocus type="text" autocomplete="off" id="mainSecretEntryText"><br><br>
+  <div class="password-input-group">
+    <input autofocus type="password" autocomplete="off" id="mainSecretEntryText" onkeypress="handleMainSecretKeypress(event)">
+    <button type="button" onclick="togglePasswordVisibility()" class="toggle-password-btn">Show</button>
+  </div><br><br>
   <button onclick='processMainSecretEntrySubmission()'>Submit</button>
 </dialog>
 
