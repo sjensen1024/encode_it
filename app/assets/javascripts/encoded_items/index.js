@@ -135,11 +135,15 @@ function processMainSecretEntrySubmission() {
 
 function toggleEncodedItemValueDisplay(encodedItemId){
     element =  document.getElementById('decoded_item_' + encodedItemId);
+    toggleButton = document.getElementById('toggle-btn-' + encodedItemId);
     if (element.className === "hidden_encoded_value"){
         showDecodedItemValue(encodedItemId);
     } else {
         element.innerHTML = "?";
         element.className = "hidden_encoded_value";
+        if (toggleButton) {
+            toggleButton.setAttribute('data-visible', 'false');
+        }
     }
 }
 
@@ -157,6 +161,7 @@ function showDecodedItemValue(encodedItemId){
 
         parsedResponse = JSON.parse(this.responseText);
         element =  document.getElementById('decoded_item_' + encodedItemId);
+        toggleButton = document.getElementById('toggle-btn-' + encodedItemId);
         if (!parsedResponse.allowed){
             alert("Access Denied: Incorrect main secret entry.");
             return;
@@ -164,6 +169,9 @@ function showDecodedItemValue(encodedItemId){
         
         element.innerHTML = parsedResponse.decoded_item.value;
         element.className = "revealed_encoded_value";
+        if (toggleButton) {
+            toggleButton.setAttribute('data-visible', 'true');
+        }
     }
     requestObject.send();
 }

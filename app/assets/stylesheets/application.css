@@ -160,6 +160,39 @@ tr{
   border-width: 2px;
 }
 
+.icon-button {
+  background-color: #c9d3dc;
+  border: 2px solid #e7f6ff;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333333;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  margin: 0 4px;
+}
+
+.icon-button:hover {
+  background-color: #b0bcc8;
+  border-color: #cce9f7;
+  transform: scale(1.1);
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+/* Toggle icon changes based on visibility state */
+button.toggle-btn[data-visible="true"] i {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 400;
+  content: "";
+}
+
+button.toggle-btn[data-visible="true"] i::before {
+  content: "\f070"; /* fa-eye-slash unicode */
+}
+
 .nav_menu ol {
   list-style-type: none;
   padding-left: 0;

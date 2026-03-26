@@ -7,9 +7,13 @@
     </span>
   </td>
   <td>
-    <button class="td-action-button" onclick="toggleEncodedItemValueDisplay(<%= encoded_item.id %>)">Toggle</button>
+    <button class="icon-button toggle-btn" id="toggle-btn-<%= encoded_item.id %>" onclick="toggleEncodedItemValueDisplay(<%= encoded_item.id %>)" title="Toggle visibility" data-visible="false">
+      <i class="fas fa-eye"></i>
+    </button>
     <% unless encoded_item.is_item_with_main_descriptor? %>
-      <button class="td-action-button" onclick="showDeleteItemDialogWithItemId(<%= encoded_item.id %>)">Delete</button>
+      <button class="icon-button" onclick="showDeleteItemDialogWithItemId(<%= encoded_item.id %>)" title="Delete item">
+        <i class="fas fa-trash"></i>
+      </button>
     <% end %>
   </td>
 </tr>
